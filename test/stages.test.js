@@ -21,23 +21,28 @@ for(const [stageId,roadLength,step,maxLength] of [[1,5,.5,7.5],[2,7.5,.75,11.25]
  assert.equal(editor.design.joints.length,10,'The triangle shares the existing road endpoints');
  assert.equal(editor.proposal(0,{x:0,y:100}).length,maxLength);
  assert.equal(editor.proposal(0,{x:0,y:.1}).length,roadLength/5);
- for(const side of [-1,1]){
-  for(const fromRight of [false,true]){
-   const triangle=new BridgeEditor();
-   assert(triangle.addRoad(0));
-   const right=triangle.design.joints.findIndex(j=>j.x===roadLength&&j.y===0);
-   const start=fromRight?right:0,end=fromRight?0:right;
-   const apexY=side*Math.sqrt(maxLength**2-(roadLength/2)**2);
-   const aim={x:roadLength/2+.15,y:apexY-.12};
-   assert(triangle.proposal(start,aim).triangleGuide);
-   const tip=triangle.addWood(start,aim);
-   assert.equal(triangle.design.joints[tip].x,roadLength/2);
-   assert.equal(triangle.design.joints[tip].y,apexY);
-   const close=triangle.proposal(tip,triangle.design.joints[end]);
-   assert.equal(close.index,end);
-   assert(Math.abs(close.length-maxLength)<1e-9);
-   assert.equal(triangle.addWood(tip,triangle.design.joints[end]),end);
-   assert(new BridgeEditor().load(triangle.export()));
+ for(let ticks=Math.floor(roadLength/(2*step))+1;ticks<=Math.round(maxLength/step);ticks++){
+  const length=ticks*step;
+  for(const side of [-1,1]){
+   for(const fromRight of [false,true]){
+    const triangle=new BridgeEditor();
+    assert(triangle.addRoad(0));
+    const right=triangle.design.joints.findIndex(j=>j.x===roadLength&&j.y===0);
+    const start=fromRight?right:0,end=fromRight?0:right;
+    const apexY=side*Math.sqrt(length**2-(roadLength/2)**2);
+    const aim={x:roadLength/2+.15,y:apexY-.12};
+    const proposal=triangle.proposal(start,aim);
+    assert(proposal.triangleGuide);
+    assert(Math.abs(proposal.length-length)<1e-9);
+    const tip=triangle.addWood(start,aim);
+    assert.equal(triangle.design.joints[tip].x,roadLength/2);
+    assert.equal(triangle.design.joints[tip].y,apexY);
+    const close=triangle.proposal(tip,triangle.design.joints[end]);
+    assert.equal(close.index,end);
+    assert(Math.abs(close.length-length)<1e-9);
+    assert.equal(triangle.addWood(tip,triangle.design.joints[end]),end);
+    assert(new BridgeEditor().load(triangle.export()));
+   }
   }
  }
  const restored=new BridgeEditor();
