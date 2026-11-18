@@ -8,6 +8,28 @@ vm.createContext(context);
 vm.runInContext(html.match(/<script>\s*\/\/ 調整[\s\S]*?<\/script>/)[0].replace(/^<script>|<\/script>$/g,''),context);
 const {CONFIG,configureStage,Simulation,BridgeEditor,Playback}=context.window.BridgeCore;
 
+for(const [stageId,roadLength,step,maxLength] of [[1,5,.5,7.5],[2,7.5,.75,11.25]]){
+ configureStage(stageId);
+ const editor=new BridgeEditor();
+ assert(editor.addRoad(0));
+ const roadEnd=editor.design.joints.findIndex(j=>j.x===roadLength&&j.y===0);
+ const height=roadLength*.8;
+ const apex=editor.addWood(0,{x:0,y:height+step/4});
+ assert(apex>=0);
+ assert(Math.abs(editor.design.joints[apex].y-height)<1e-9,'A new endpoint snaps to a stepped length');
+ assert.equal(editor.addWood(apex,{x:roadLength+.1,y:.1}),roadEnd,'A diagonal snaps to an existing road joint');
+ assert.equal(editor.design.joints.length,10,'The triangle shares the existing road endpoints');
+ assert.equal(editor.proposal(0,{x:0,y:100}).length,maxLength);
+ assert.equal(editor.proposal(0,{x:0,y:.1}).length,roadLength/5);
+ const restored=new BridgeEditor();
+ assert(restored.load(editor.export()));
+ assert.deepEqual(restored.design,editor.design);
+ const tooLong=editor.export();
+ tooLong.design.joints[apex].y=maxLength+step;
+ assert.throws(()=>restored.load(tooLong),/部材の長さ/);
+}
+configureStage(1);
+
 const firstEditor=new BridgeEditor();
 for(let slot=0;slot<5;slot++)assert(firstEditor.addRoad(slot));
 const firstSimulation=new Simulation(firstEditor.design);
@@ -98,4 +120,4 @@ while(!weak.outcome){weak.step(CONFIG.fixedDt);weak.events.length=0}
 assert.equal(weak.outcome,'failure');
 configureStage(1);
 assert.equal(CONFIG.valleyWidth,25);
-console.log('PASS: stage isolation, legacy saves, fixed lengths, 3-car load transmission, all-car success, any-car failure, snapshots and deterministic playback.');
+console.log('PASS: stage isolation, legacy saves, stepped wood lengths, joint snapping, 3-car load transmission, all-car success, any-car failure, snapshots and deterministic playback.');
