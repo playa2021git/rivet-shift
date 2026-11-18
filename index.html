@@ -4,18 +4,38 @@
 *{box-sizing:border-box}body{margin:0;overflow:hidden;background:#bde9f4;color:#213d48;font-family:system-ui,'Yu Gothic',sans-serif;font-size:13px}canvas{display:block}button,select{font:inherit;border:0;border-radius:10px;padding:9px 12px;background:#fff;color:#304953;cursor:pointer;font-weight:750;box-shadow:0 2px 0 #183c4718}button:hover{filter:brightness(.96)}button.active{background:#285268;color:white}button:disabled{opacity:.42;cursor:default}.start{background:#f6bb42;color:#3b402d}header{position:absolute;top:16px;left:20px;right:20px;display:flex;align-items:center;gap:12px;pointer-events:none}header>*{pointer-events:auto}.brand{font-size:23px;font-weight:950;white-space:nowrap}.brand small{display:block;font-size:10px;letter-spacing:2px;color:#527780;margin-top:2px}.budget{background:#ffffffed;padding:10px 14px;border-radius:13px;width:265px;margin-left:auto;font-size:11px}.budget strong{float:right}progress{width:100%;height:7px;accent-color:#efa938;display:block;margin-top:7px}nav{display:flex;gap:6px}.panel{position:absolute;left:20px;top:88px;width:238px;max-height:calc(100vh - 158px);background:#fffffff0;border-radius:16px;padding:15px;overflow:auto;box-shadow:0 8px 30px #264c6010}.panel.collapsed{width:64px;overflow:hidden}.panel.collapsed .panelBody{display:none}.panel h2{font-size:16px;margin:8px 0 12px}.eyebrow{font-size:10px;letter-spacing:1px;color:#708b94;font-weight:850}.tools{display:grid;grid-template-columns:1fr 1fr;gap:6px}.panel p{font-size:12px;line-height:1.8;color:#5e7982;margin:10px 0}.line{height:1px;background:#dce8e9;margin:12px 0}.panel button{font-size:12px}.history{display:flex;gap:5px;margin:10px 0}.history button{flex:1}.fileButtons{display:grid;gap:5px;margin-top:10px}.selectionButtons{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}.selectionButtons button{padding:7px 8px}.viewbar{position:absolute;top:88px;left:278px;right:20px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}.viewbar button{font-size:12px;padding:8px 11px}.viewbar label{background:#ffffffdc;padding:8px;border-radius:10px;font-size:11px}.playbar{position:absolute;bottom:54px;left:278px;right:20px;background:#ffffffe8;padding:10px 12px;border-radius:13px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}.playbar label{font-size:11px}.playbar button,.playbar select{font-size:12px}.legend{position:absolute;right:20px;bottom:145px;background:#ffffffdf;border-radius:13px;padding:12px 16px;font-size:11px;width:210px}.gradient{height:7px;background:linear-gradient(90deg,#249be6,#62c3b4 35%,#f2d150 55%,#f49a3f 80%,#ee4743);border-radius:6px;margin:9px 0}.legend .labels{display:flex;justify-content:space-between}.bottom{position:absolute;bottom:12px;left:20px;right:20px;font-size:12px;background:#ffffffdf;padding:10px 14px;border-radius:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#tooltip{position:absolute;pointer-events:none;background:#254858;color:white;border-radius:9px;padding:8px 12px;font-size:12px;display:none;max-width:300px;z-index:30}#result{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:#153d5018;pointer-events:none;z-index:15}#result>div{background:#fffef5ed;padding:24px 32px;border-radius:24px;text-align:center;box-shadow:0 16px 70px #183b4930;pointer-events:auto;max-width:560px}#result h1{margin:8px 0;font-size:30px}#result p{font-size:13px;white-space:pre-line;line-height:1.9}#stars{color:#e4a52f;font-size:28px;letter-spacing:5px}#best{font-size:12px!important;color:#5e7982}.resultButtons{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}#selectionRect{position:absolute;border:2px solid #edbd4c;background:#efc85125;pointer-events:none;display:none;z-index:20}#coach{position:absolute;top:155px;left:278px;width:335px;background:#fff9db;padding:20px;border-radius:18px;box-shadow:0 10px 40px #21455725;z-index:25;display:none}#coach h3{margin:0 0 10px}#coach p{line-height:1.8;font-size:13px}#coachClose{float:right;box-shadow:none;padding:0 6px;background:transparent}#coach details{font-size:11px;line-height:1.8;margin:12px 0;max-height:260px;overflow:auto}#audioDetails{position:relative}#audioDetails summary{background:white;border-radius:10px;list-style:none;padding:9px;cursor:pointer;font-weight:700}#audioSettings{position:absolute;right:0;top:45px;background:#fffef6;width:225px;padding:15px;border-radius:14px;box-shadow:0 8px 30px #264c6020;z-index:35}#audioSettings label{display:flex;align-items:center;gap:10px;margin:10px 0;font-size:12px}#audioSettings input{width:140px}#audioSettings button{font-size:12px;width:100%;margin:4px 0}#error{position:absolute;left:25%;right:15%;bottom:200px;background:#fff0d1;padding:22px;border-radius:15px;z-index:40;display:none;line-height:1.8}kbd{background:#e4eeee;border-radius:3px;padding:1px 4px}input[type=checkbox]{accent-color:#285268}summary{cursor:pointer}button:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #f3bd47;outline-offset:2px}
 @media(max-width:1050px){header{left:12px;right:12px;gap:6px}.brand{font-size:18px}.budget{width:220px}header button{padding:9px}.panel{left:12px;width:208px}.viewbar,.playbar{left:235px}.legend{width:185px}#coach{left:235px}.playbar{gap:5px}}
 @media(max-height:650px){.panel{max-height:calc(100vh - 145px);top:80px}.viewbar{top:80px}.legend{display:none}.playbar{bottom:50px}header{top:10px}#coach{top:130px}}
+#clear{color:#a42529;border:2px solid #b83e41;background:#fff4f2;margin-top:12px;width:100%}
+#startHint,#saveState,#speedHint{font-size:11px}
+.startControl{position:relative}#startHint{display:block;background:#fffef5;color:#304953;border-radius:6px;padding:4px 7px;margin-top:3px}
+#startHint:empty,#saveState:empty{display:none}
+[hidden]{display:none!important}
+button:focus-visible,summary:focus-visible{outline:3px solid #285268;outline-offset:2px}
+@media(pointer:coarse){button,select,summary{min-height:44px}}
+@media(max-width:700px){
+ header{top:6px;left:8px;right:8px;flex-wrap:wrap;gap:4px}
+ .brand{display:none}.budget{margin-left:0;width:100%;padding:4px 8px}
+ header nav{flex-wrap:wrap}header button{padding:6px}
+ .viewbar{top:88px;left:8px;right:8px;flex-wrap:nowrap;overflow-x:auto;white-space:nowrap}
+ .panel{top:auto;bottom:42px;left:8px;right:8px;width:auto;max-height:29vh;padding:8px}
+ .panel.collapsed{width:56px;right:auto}
+ .panelBody{display:flex;flex-direction:column}
+ .tools{order:-2;display:flex;flex-wrap:wrap;gap:4px}
+ .playbar{left:8px;right:8px;bottom:calc(29vh + 49px);overflow-x:auto;flex-wrap:nowrap;white-space:nowrap}
+ .legend{display:none}#coach{top:140px;left:8px;right:8px;max-width:none;width:auto}
+ .bottom{bottom:4px;left:8px;right:8px}#result>div{margin:8px;max-height:95vh;overflow:auto;padding:16px}
+}
 </style>
 <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
 </head><body>
-<header><div class="brand">RIVET SHIFT<small>考えて、架けて、試そう。</small></div><div class="budget">予算の目安 <strong id="money"></strong><progress id="budget" value="0" max="1"></progress></div><nav><button class="start" id="start">▶ テスト開始</button><button id="reset">↶ やり直し</button><button id="clear">全部消す</button><button id="help" aria-label="遊び方">?</button><button id="mute" aria-label="効果音の消音">🔊</button></nav><details id="audioDetails"><summary>音の設定</summary><div id="audioSettings"><label>効果音<input id="seVolume" type="range" min="0" max="1" step=".01" aria-label="効果音の音量"></label><label>BGM<input id="bgmVolume" type="range" min="0" max=".5" step=".01" aria-label="BGMの音量"></label><button id="bgmToggle">🎵 BGMをつける</button><button id="bgmMute">BGM消音</button></div></details></header>
-<aside class="panel" id="panel"><button id="panelToggle" aria-label="操作パネルを折りたたむ">◀</button><div class="panelBody"><div class="eyebrow" id="stageName" style="margin-top:10px">ステージ 01</div><select id="stageSelect" aria-label="ステージ選択" style="width:100%;margin-top:8px"><option value="1">01 リバーサイド</option><option value="2">02 コンボイライン</option></select><h2>どんな形なら、支えられる？</h2><div class="tools"><button id="road">道路 5m</button><button id="wood">木材 最大7.5m</button><button id="select">▭ 選択</button><button id="pan">✋ 移動</button></div><p id="material"></p><strong id="buildCount"></strong><p id="selfWeight" style="margin:6px 0"></p><progress id="buildProgress" max="5" value="0"></progress><p>道路は空き区間をクリック。<br>木材は始点を選び、向きと距離を決めて配置。<br>赤い輪は接合点。水色の点に合わせると、同じ長さの木材2本で三角形を作れます。<br>補強のない道路は自重で崩れます。</p><div class="history"><button id="undo">↶ 戻す</button><button id="redo">↷ 進める</button></div><div class="line"></div><span id="selectionCount">選択 0本</span><div class="selectionButtons"><button id="deleteSelection">選択を削除</button><button id="copySelection">コピー</button><button id="pasteSelection">貼り付け</button></div><div class="fileButtons"><button id="exportDesign">📤 設計を書き出す</button><button id="importDesign">📥 設計を読み込む</button><input id="fileInput" type="file" accept=".json,application/json" hidden></div><details style="margin-top:12px"><summary>荷重テスト</summary><button id="weight" style="margin-top:8px">中央に1000kg（車なし）</button></details><p>Space＋ドラッグで移動<br>右クリックで部材を削除<br>Escで接続を解除 ／ ?で操作一覧</p></div></aside>
+<header><div class="brand">RIVET SHIFT<small>考えて、架けて、試そう。</small></div><div class="budget">予算の目安 <strong id="money"></strong><progress id="budget" value="0" max="1"></progress></div><nav><div class="startControl"><button class="start" id="start" aria-describedby="startHint">▶ 車を走らせる</button><span id="startHint" aria-live="polite"></span></div><button id="reset">橋の編集に戻る</button><button id="help" aria-label="遊び方">?</button><button id="mute" aria-label="効果音の消音">🔊</button></nav><details id="audioDetails"><summary>音の設定</summary><div id="audioSettings"><label>効果音<input id="seVolume" type="range" min="0" max="1" step=".01" aria-label="効果音の音量"></label><label>BGM<input id="bgmVolume" type="range" min="0" max=".5" step=".01" aria-label="BGMの音量"></label><button id="bgmToggle">🎵 BGMをつける</button><button id="bgmMute">BGM消音</button></div></details></header>
+<aside class="panel" id="panel"><button id="panelToggle" aria-label="操作パネルを折りたたむ">◀</button><div class="panelBody"><div class="eyebrow" id="stageName" style="margin-top:10px">ステージ 01</div><select id="stageSelect" aria-label="ステージ選択" style="width:100%;margin-top:8px"><option value="1">01 リバーサイド</option><option value="2">02 コンボイライン</option></select><h2>どんな形なら、支えられる？</h2><div class="tools"><button id="road">道路 5m</button><button id="wood">木材 最大7.5m</button><button id="select">▭ 選択</button><button id="pan">✋ 移動</button><button id="erase">削除</button></div><button id="newStart" hidden>始点を選び直す</button><p id="material"></p><strong id="buildCount"></strong><p id="selfWeight" style="margin:6px 0"></p><progress id="buildProgress" max="5" value="0"></progress><p>道路は空き区間をクリック。<br>木材は始点を選び、向きと距離を決めて配置。<br>赤い輪は接合点。水色の点に合わせると、同じ長さの木材2本で三角形を作れます。<br>補強のない道路は自重で崩れます。</p><div class="history"><button id="undo">↶ 1つ戻す</button><button id="redo">↷ 進める</button></div><div class="line"></div><span id="selectionCount">選択 0本</span><div class="selectionButtons"><button id="deleteSelection">選択を削除</button><button id="copySelection">コピー</button><button id="pasteSelection">貼り付け</button><button id="selectAll">木材を全選択</button><button id="flipPaste" hidden>左右反転</button><button id="cancelPaste" hidden>貼り付けを解除</button></div><div class="fileButtons"><button id="exportDesign">📤 設計を書き出す</button><button id="importDesign">📥 設計を読み込む</button><input id="fileInput" type="file" accept=".json,application/json" hidden></div><details style="margin-top:12px"><summary>荷重テスト</summary><button id="weight" style="margin-top:8px">中央に1000kg（車なし）</button></details><p>Space＋ドラッグで移動<br>右クリックで部材を削除<br>Escで接続を解除 ／ ?で操作一覧</p><p id="saveState" role="status"></p><button id="clear">🗑 この橋を全部消す</button></div></aside>
 <div class="viewbar"><button id="viewAll">全体</button><button id="viewLeft">左岸</button><button id="viewCenter">中央</button><button id="viewRight">右岸</button><button id="follow">🎥 車を追う</button><button id="orbit">ぐるっと見る</button><label><input type="checkbox" id="forceType"> 力の種類</label></div>
-<div class="playbar"><button id="pause">⏸ 一時停止</button><label>速度 <select id="speed"><option value="0.1">0.1×</option><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option><option value="4">4×</option><option value="8">8×</option></select></label><button id="step">1コマ進める</button><label><input type="checkbox" id="autoSlow"> 破断時に自動スロー</label><strong id="clock">0.00秒</strong><button id="replayExit" hidden>結果に戻る</button></div>
-<div class="legend"><span id="legendTitle">部材の負荷率</span><strong id="peak" style="float:right">0%</strong><div class="gradient" id="legendGradient"></div><div class="labels"><span id="legendLeft">余裕あり</span><span id="legendRight">破断寸前</span></div></div>
+<div class="playbar"><button id="pause">⏸ 一時停止</button><label>速度 <select id="speed"><option value="0.1">0.1×</option><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option><option value="4">4×</option><option value="8">8×</option></select></label><button id="step">1コマ進める</button><label><input type="checkbox" id="autoSlow"> 破断時に自動スロー</label><strong id="clock">0.00秒</strong><small id="speedHint" hidden>処理速度に応じて再生が遅くなる場合があります</small><button id="replayExit" hidden>結果に戻る</button></div>
+<div class="legend"><span id="legendTitle">現在の最大負荷</span><strong id="peak" style="float:right">0%</strong><div class="gradient" id="legendGradient"></div><div class="labels"><span id="legendLeft">余裕あり</span><span id="legendRight">破断寸前</span></div></div>
 <div class="bottom" id="status">読み込み中…</div><div id="tooltip"></div><div id="selectionRect"></div>
-<div id="result"><div><div class="eyebrow">走行結果</div><div id="stars"></div><h1 id="resultTitle"></h1><p id="resultText"></p><p id="best"></p><div class="resultButtons"><button id="again" class="start">設計に戻る</button><button id="replay">崩壊の瞬間をもう一度見る</button></div></div></div>
+<div id="result" role="dialog" aria-labelledby="resultTitle"><div><div class="eyebrow">走行結果</div><div id="stars"></div><h1 id="resultTitle"></h1><p id="resultText"></p><p id="best"></p><div class="resultButtons"><button id="again" class="start">橋の編集に戻る</button><button id="replay">崩壊の瞬間をもう一度見る</button><button id="copyResult">結果をコピー</button></div><p id="copyStatus" role="status"></p></div></div>
 <div id="coach"><button id="coachClose" aria-label="ガイドを閉じる">×</button><h3 id="coachTitle"></h3><p id="coachText"></p><details><summary>ショートカット一覧</summary>Space：編集時は押しながらドラッグ／走行時は一時停止<br>矢印・WASD：視点移動<br>F・ダブルクリック：全体表示<br>[ / ]：再生速度を変更<br>Ctrl+Z / Ctrl+Y・Ctrl+Shift+Z：戻す／進める<br>選択ツールでドラッグ、Shiftで追加<br>Ctrl+A：木材を全選択<br>Ctrl+C / X / V：コピー／切り取り／貼り付け<br>H：貼り付けを左右反転<br>Delete：選択を削除<br>Esc：接続・貼り付け・選択を解除</details><button id="coachNext" class="start">次へ</button></div>
-<div id="error" role="alert"></div>
+<div id="error" role="alert"></div><button id="retryBoot" hidden style="position:fixed;top:68px;left:16px;z-index:50">再読み込み</button>
 <script>
 // 調整する数値はここに集約。物理はメートル・キログラム・秒。
 const CONFIG={gravity:9.8,substeps:24,fixedDt:1/60,iterations:8,damping:1.8,stageId:1,carCount:1,carSpacing:5,budget:24000,valleyWidth:25,roadLength:5,woodLength:5,angleStep:Math.PI/12,jointSnap:.55,historyLimit:100,importMaxBytes:16777216,maxFrameSteps:32,worldMinX:-180,worldMaxX:205,minZoom:.65,maxZoom:2.5,jointMass:8,carMass:850,carSpeed:4,wheelbase:2.4,waterY:-14.5,timeLimit:30,materials:{road:{price:430,density:13,stiffness:2200000,tension:12000,compression:9600},wood:{price:150,density:14,stiffness:2400000,tension:45000,compression:27000}}};
@@ -49,7 +69,7 @@ class Simulation{
   this.outcome='failure';
   // Use the position where support was lost, before the car drifts during the fall.
   const progress=(car.fallX??car.x)/this.config.valleyWidth;
-  this.failureTitle=!this.carLoadedBridge?'橋が自分の重さで崩れた':progress>=.8?'あと一歩で対岸！':'車が乗ったとたん、橋が崩れた';
+  this.failureTitle=!this.carLoadedBridge?'橋が自分の重さで崩れた':progress>=.8?'あと一歩で対岸！':progress<=.2?'車が乗ったとたん、橋が崩れた':'走行中に橋が崩れた';
  }
  roadAt(x){
   if(x<=0||x>=this.config.valleyWidth)return{y:0,a:null,b:null,t:0};
@@ -103,7 +123,7 @@ class Simulation{
  for(const j of this.joints){j.px=j.x;j.py=j.y;if(j.fixed)continue;j.vx*=Math.exp(-this.config.damping*h);j.vy*=Math.exp(-this.config.damping*h);j.vx+=j.fx/j.mass*h;j.vy+=j.fy/j.mass*h;j.x+=j.vx*h;j.y+=j.vy*h}for(const m of this.members)m.lambda=0;
  // XPBDの距離拘束。lambda/h²が符号付き軸力（引張が正）。
  for(let i=0;i<this.config.iterations;i++)for(const m of this.members){if(m.broken)continue;const a=m.a,b=m.b,dx=b.x-a.x,dy=b.y-a.y,L=Math.hypot(dx,dy);if(L<1e-8)continue;const wa=a.fixed?0:1/a.mass,wb=b.fixed?0:1/b.mass,alpha=m.L0/(this.config.materials[m.material].stiffness*h*h);const dl=(-(L-m.L0)-alpha*m.lambda)/(wa+wb+alpha);m.lambda+=dl;const nx=dx/L,ny=dy/L;a.x-=wa*dl*nx;a.y-=wa*dl*ny;b.x+=wb*dl*nx;b.y+=wb*dl*ny}
- for(const m of this.members){if(m.broken)continue;m.force=-m.lambda/(h*h);const mat=this.config.materials[m.material];m.load=Math.abs(m.force)/(m.force>=0?mat.tension:mat.compression);this.maxLoad=Math.max(this.maxLoad,m.load);if(m.load>1){m.broken=true;m.a.mass=Math.max(this.config.jointMass,m.a.mass-m.mass/2);m.b.mass=Math.max(this.config.jointMass,m.b.mass-m.mass/2);this.breakCount++;this.events.push({type:'break',ax:m.a.x,ay:m.a.y,bx:m.b.x,by:m.b.y,material:m.material})}}
+ for(const m of this.members){if(m.broken)continue;m.force=-m.lambda/(h*h);const mat=this.config.materials[m.material];m.load=Math.abs(m.force)/(m.force>=0?mat.tension:mat.compression);this.maxLoad=Math.max(this.maxLoad,m.load);if(m.load>1){m.broken=true;m.a.mass=Math.max(this.config.jointMass,m.a.mass-m.mass/2);m.b.mass=Math.max(this.config.jointMass,m.b.mass-m.mass/2);this.breakCount++;this.events.push({type:'break',ax:m.a.x,ay:m.a.y,bx:m.b.x,by:m.b.y,material:m.material,load:m.load})}}
  for(const j of this.joints){if(j.fixed)continue;j.vx=(j.x-j.px)/h;j.vy=(j.y-j.py)/h;if(!j.splashed&&j.py>=this.config.waterY&&j.y<this.config.waterY){j.splashed=true;this.events.push({type:'splash',x:j.x,y:this.config.waterY})}}
 
   if(!this.debug){
@@ -209,7 +229,7 @@ class BridgeEditor{
 class Playback{
  constructor(design,debug=false){this.sim=new Simulation(design,debug);this.scale=1;this.paused=false;this.accumulator=0;this.frames=[];this.events=[];this.firstBreak=null;this.replay=null;this.autoSlow=false;this.slowRemaining=0;this.capture([])}
  capture(events){const s=this.sim;this.frames.push({time:s.time,joints:s.joints.map(j=>({x:j.x,y:j.y})),members:s.members.map(m=>({load:m.load,force:m.force,broken:m.broken})),car:{...s.car},cars:s.cars.map(car=>({...car})),outcome:s.outcome,events});}
- advance(){if(this.sim.outcome)return;this.sim.step(CONFIG.fixedDt);const events=this.sim.events.splice(0);this.capture(events);for(const e of events){this.events.push(e);if(e.type==='break'&&!this.firstBreak){this.firstBreak={frame:this.frames.length-1,time:this.sim.time,x:(e.ax+e.bx)/2,y:(e.ay+e.by)/2};if(this.autoSlow)this.slowRemaining=1}}}
+ advance(){if(this.sim.outcome)return;this.sim.step(CONFIG.fixedDt);const events=this.sim.events.splice(0);this.capture(events);for(const e of events){this.events.push(e);if(e.type==='break'&&!this.firstBreak){this.firstBreak={frame:this.frames.length-1,time:this.sim.time,material:e.material,load:e.load,x:(e.ax+e.bx)/2,y:(e.ay+e.by)/2};if(this.autoSlow)this.slowRemaining=1}}}
  tick(dt){if(this.paused)return;if(this.replay){const r=this.replay;r.cursor=Math.min(r.end,r.cursor+dt*.25/CONFIG.fixedDt);const target=Math.floor(r.cursor);while(r.delivered<target){r.delivered++;this.events.push(...this.frames[r.delivered].events)}if(r.cursor>=r.end)this.paused=true;return}if(this.sim.outcome)return;const effective=this.slowRemaining>0?.3:this.scale;this.slowRemaining=Math.max(0,this.slowRemaining-dt);this.accumulator+=dt*effective;let steps=0;while(this.accumulator>=CONFIG.fixedDt&&steps<CONFIG.maxFrameSteps&&!this.sim.outcome){const slowing=this.slowRemaining>0;this.advance();this.accumulator-=CONFIG.fixedDt;steps++;if(!slowing&&this.slowRemaining>0){this.accumulator=0;break}}if(steps===CONFIG.maxFrameSteps)this.accumulator=Math.min(this.accumulator,CONFIG.fixedDt)}
  frameStep(){this.paused=true;if(this.replay){const r=this.replay;if(r.cursor>=r.end)return;r.cursor=Math.min(r.end,Math.floor(r.cursor)+1);r.delivered=Math.floor(r.cursor);this.events.push(...this.frames[r.delivered].events)}else this.advance()}
  startReplay(){if(!this.firstBreak)return false;const start=Math.max(0,this.firstBreak.frame-Math.round(.5/CONFIG.fixedDt));this.replay={cursor:start,delivered:start,end:this.frames.length-1};this.events=[];this.paused=false;return true}
@@ -218,7 +238,30 @@ class Playback{
 function structuralMass(d=design){return d.members.reduce((sum,m)=>{const a=d.joints[m.a],b=d.joints[m.b];return sum+Math.hypot(a.x-b.x,a.y-b.y)*CONFIG.materials[m.material].density},0)+d.joints.filter(j=>!j.fixed).length*CONFIG.jointMass}
 window.BridgeCore={CONFIG,STAGES,configureStage,Simulation,BridgeEditor,Playback,cost,structuralMass};
 </script>
-<script>window.addEventListener('unhandledrejection',function(e){const box=document.getElementById('error');box.style.display='block';box.textContent='描画ライブラリを読み込めません。vendorフォルダにthree.module.min.jsがあるか確認してください。';});window.addEventListener('error',function(e){const box=document.getElementById('error');box.style.display='block';box.textContent='読み込みエラー：'+(e.message||'描画ライブラリを読み込めません')+'。vendorフォルダにthree.module.min.jsがあるか確認してください。';});</script>
+<script>
+function showStartupError(message){
+ const box=document.getElementById('error');
+ box.style.display='block';box.textContent=message;
+ document.getElementById('status').textContent='ゲームを開始できませんでした。';
+ document.getElementById('retryBoot').hidden=false;
+}
+document.getElementById('retryBoot').onclick=()=>location.reload();
+window.addEventListener('unhandledrejection',()=>{
+ if(document.getElementById('status').textContent==='読み込み中…'){
+  showStartupError('ゲームの読み込みに失敗しました。通信状態を確認して再読み込みしてください。');
+ }
+});
+window.addEventListener('error',()=>{
+ if(document.getElementById('status').textContent==='読み込み中…'){
+  showStartupError('ゲームの起動に失敗しました。再読み込みし、続く場合は先生に知らせてください。');
+ }
+},true);
+setTimeout(()=>{
+ if(document.getElementById('status').textContent==='読み込み中…'){
+  showStartupError('ゲームの読み込みに時間がかかっています。通信状態を確認してください。');
+ }
+},15000);
+</script>
 <script type="module" id="offlineThree">
 // Three.js r170 / MIT。ファイルを直接開いた場合だけ使用。
 if(location.protocol==='file:'){
@@ -255,7 +298,12 @@ let elapsed=0,shake=0,shown=false,coastTime=0,coastX=0,clipboard=null,pasteMode=
 let orbit=false,follow=false,orbitYaw=0,orbitPitch=0,spaceHeld=false,coachIndex=0;
 const chosen=new Set(),keys=new Set(),debris=[],particles=[],clouds=[],bridgeShadows=[];
 const scene=new THREE.Scene();scene.background=new THREE.Color('#bce8f1');scene.fog=new THREE.Fog('#bce8f1',100,230);
-const renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'low-power'});
+let renderer;
+try{renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'low-power'})}
+catch(error){
+ showStartupError('この端末で3D表示を開始できません。再読み込みしても続くときは、別のブラウザや端末を試すか、先生に知らせてください。');
+ throw error;
+}
 renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.outputColorSpace=THREE.SRGBColorSpace;
 renderer.domElement.id='gameCanvas';renderer.domElement.style.touchAction='none';document.body.prepend(renderer.domElement);
 const camera=new THREE.OrthographicCamera(-30,30,19,-19,.1,500);
@@ -392,7 +440,11 @@ function rebuild(){
  for(const j of design.joints)mesh(jointHintGeometry,jointHintMaterial,j.x,j.y,0,1,1,1,jointHints).renderOrder=4;
  rebuildGuide();updateUI();
 }
-function persist(){if(!writeStore(STORE,editor.export()))status('設計を自動保存できません。書き出しをご利用ください。')}
+function persist(){
+ const saved=writeStore(STORE,editor.export());
+ $('saveState').textContent=saved?'この端末に保存済み':'保存できません。設計を書き出してください。';
+ return saved;
+}
 function changed(sound='place'){design=editor.design;cancelSelection();chosen.clear();rebuild();persist();audio.effect(sound)}
 function cancelSelection(){selected=null;pasteMode=false;preview.visible=false;marker.visible=false;directionDots.visible=false;triangleHints.visible=false;clearBars(pasteGroup);hideTooltip()}
 function showSelection(){if(selected===null)return;const a=design.joints[selected];marker.position.set(a.x,a.y,1.3);marker.visible=true;directionDots.position.set(a.x,a.y,0);for(const [i,dot] of directionDots.children.entries()){const angle=i*CONFIG.angleStep;dot.position.x=editor.woodMaxLength*Math.cos(angle);dot.position.y=editor.woodMaxLength*Math.sin(angle)}directionDots.visible=true;showTriangleHints();
@@ -450,15 +502,24 @@ const audio=new Sound();
 addEventListener('pointerdown',()=>audio.unlock(),{passive:true});
 $('mute').onclick=()=>{settings.muted=!settings.muted;audio.update()};$('seVolume').value=settings.se;$('bgmVolume').value=settings.bgm;
 $('seVolume').oninput=e=>{settings.se=+e.target.value;audio.update()};$('bgmVolume').oninput=e=>{settings.bgm=+e.target.value;audio.update()};$('bgmMute').onclick=()=>{settings.bgmMuted=!settings.bgmMuted;audio.update()};$('bgmToggle').onclick=async()=>{await audio.unlock();musicEnabled=!musicEnabled;audio.nextBeat=0;audio.update()};audio.update();
-document.addEventListener('visibilitychange',()=>{keys.clear();spaceHeld=false;drag=null;audio.nextBeat=0;if(audio.ctx){if(document.hidden)audio.ctx.suspend();else audio.ctx.resume().catch(()=>{})}});
+document.addEventListener('visibilitychange',()=>{keys.clear();spaceHeld=false;cancelPointerInput();audio.nextBeat=0;if(audio.ctx){if(document.hidden)audio.ctx.suspend();else audio.ctx.resume().catch(()=>{})}});
 
 function status(message){$('status').textContent=message}
 function updateUI(){
  const amount=cost(),wood=design.members.filter(m=>m.material==='wood').length;
- $('money').textContent=`¥${amount.toLocaleString()} / ¥${CONFIG.budget.toLocaleString()}`;$('budget').value=amount/CONFIG.budget;
+ const remaining=CONFIG.budget-amount;
+ $('money').textContent=`¥${amount.toLocaleString()} / ¥${CONFIG.budget.toLocaleString()}（${remaining>=0?'残り':'目安超過'} ¥${Math.abs(remaining).toLocaleString()}）`;
+ $('budget').title=remaining<0?'予算の目安を超えても建設できます':'予算の目安';
+ const roadsLeft=editor.roadSlots-editor.roads;
+ $('startHint').textContent=roadsLeft>0?`道路をあと${roadsLeft}枚置くと走行できます。`:'';
+ $('reset').hidden=!sim;
+ $('newStart').hidden=sim||orbit||mode!=='wood'||selected===null;
+ $('selectAll').disabled=!!sim||orbit||!wood;
+ $('flipPaste').hidden=$('cancelPaste').hidden=!pasteMode;
+ $('speedHint').hidden=!play;$('budget').value=amount/CONFIG.budget;
  $('buildCount').textContent=`道路 ${editor.roads} / ${editor.roadSlots}枚　木材 ${wood}本`;$('buildProgress').max=editor.roadSlots;$('buildProgress').value=editor.roads;$('selfWeight').textContent=`橋の自重 ${Math.round(structuralMass()).toLocaleString()}kg ／ 車 ${CONFIG.carMass}kg × ${CONFIG.carCount}台（合計${(CONFIG.carMass*CONFIG.carCount).toLocaleString()}kg）`;$('stageName').textContent=`ステージ ${String(stage.id).padStart(2,'0')} ／ ${stage.name}・${CONFIG.valleyWidth}m`;$('stageSelect').value=stage.id;$('road').textContent=`道路 ${CONFIG.roadLength}m`;$('wood').textContent=`木材 最大${editor.woodMaxLength}m`;
- $('material').textContent=mode==='road'?`道路 ${CONFIG.roadLength}m・¥${editor.roadPrice.toLocaleString()}・${CONFIG.roadLength*CONFIG.materials.road.density}kg / 枚`:mode==='wood'?`木材 ${editor.woodMinLength}〜${editor.woodMaxLength}m（${editor.woodStep}m刻み）・¥${CONFIG.materials.wood.price}/m・${CONFIG.materials.wood.density}kg/m`:mode==='select'?'ドラッグで木材をまとめて選択。':'ドラッグ、矢印キー、WASDで移動。';
- for(const id of ['road','wood','select','pan']){$(id).classList.toggle('active',mode===id);$(id).disabled=!!sim||orbit}
+ $('material').textContent=mode==='road'?`道路 ${CONFIG.roadLength}m・¥${editor.roadPrice.toLocaleString()}・${CONFIG.roadLength*CONFIG.materials.road.density}kg / 枚`:mode==='wood'?`木材 ${editor.woodMinLength}〜${editor.woodMaxLength}m（${editor.woodStep}m刻み）・¥${CONFIG.materials.wood.price}/m・${CONFIG.materials.wood.density}kg/m`:mode==='select'?'ドラッグで木材をまとめて選択。':mode==='erase'?'消したい部材を押してください。1つ戻すで復元できます。':'ドラッグ、矢印キー、WASDで移動。';
+ for(const id of ['road','wood','select','pan','erase']){$(id).classList.toggle('active',mode===id);$(id).disabled=!!sim||orbit}
  for(const id of ['clear','undo','redo','importDesign'])$(id).disabled=!!sim||orbit||(id==='undo'&&!editor.history.length)||(id==='redo'&&!editor.future.length);
  for(const id of ['start','weight'])$(id).disabled=!!sim||editor.roads<editor.roadSlots||orbit;
  for(const id of ['deleteSelection','copySelection'])$(id).disabled=!!sim||orbit||!chosen.size;
@@ -467,18 +528,36 @@ function updateUI(){
  $('speed').value=play?.replay?0.25:(play?.scale??1);$('replayExit').hidden=!play?.replay;$('speed').disabled=!play||!!play.replay;
  $('follow').classList.toggle('active',follow);$('orbit').classList.toggle('active',orbit);$('orbit').textContent=orbit?'編集に戻る':'ぐるっと見る';
  $('selectionCount').textContent=`選択 ${chosen.size}本`;
- if(!sim)status(orbit?'ドラッグで回転。編集するには「編集に戻る」。':mode==='road'?'空いている道路区間をクリック。補強の形は、自分で考えて試そう。':mode==='wood'?'接合点 → 向きを決めてクリック。Escで接続を解除。':mode==='select'?'ドラッグで範囲選択。Shiftで追加、Deleteで削除、Ctrl+C / Vでコピー。':'Space＋ドラッグでも移動できます。Fキーで全体表示。');
+ if(!sim)status(orbit?'ドラッグで回転。編集するには「編集に戻る」。':mode==='road'?'空いている道路区間をクリック。補強の形は、自分で考えて試そう。':mode==='wood'?(selected===null?'赤い輪を押して木材の始点を選びます。':'置きたい先を押します。水色の点で左右対称の三角形を作れます。'):mode==='erase'?'消したい部材を押してください。':mode==='select'?'ドラッグで範囲選択。Shiftで追加、Deleteで削除、Ctrl+C / Vでコピー。':'Space＋ドラッグでも移動できます。Fキーで全体表示。');
 }
 function clearEffects(){for(const d of debris){scene.remove(d.obj);d.obj.userData.mat?.dispose()}debris.length=0;for(const p of particles){scene.remove(p.obj);if(p.ownMat)p.obj.material.dispose()}particles.length=0;splashBatch.count=0}
-function reset(){play=null;sim=null;shown=false;coastTime=0;cancelSelection();chosen.clear();clearEffects();breakRing.visible=false;$('result').style.display='none';drawCars(carModels.map((_,index)=>({x:-4-index*CONFIG.carSpacing,y:.52,angle:0,falling:false})));rebuild();$('peak').textContent='0%';$('clock').textContent='0.00秒';}
+function reset(){play=null;sim=null;shown=false;coastTime=0;shake=0;follow=false;fit();Object.assign(view,target);updateCamera();cancelSelection();chosen.clear();clearEffects();breakRing.visible=false;$('result').style.display='none';drawCars(carModels.map((_,index)=>({x:-4-index*CONFIG.carSpacing,y:.52,angle:0,falling:false})));rebuild();$('peak').textContent='0%';$('clock').textContent='0.00秒';}
 function run(debug=false){if(sim||orbit||editor.roads<editor.roadSlots)return;$('coach').style.display='none';writeStore('tanigoe.guideSeen',true);cancelSelection();chosen.clear();highlightSelection();play=new Playback(design,debug);play.autoSlow=$('autoSlow').checked;sim=play.sim;shown=false;coastTime=0;clearEffects();breakRing.visible=false;$('result').style.display='none';carModels.forEach(model=>{model.group.visible=!debug;model.shadow.visible=!debug});rebuildGuide();updateUI();audio.effect('start');status(debug?'中央に1000kgの荷重をかけています。':'走行中。色ときしみに注目しよう。')}
-$('stageSelect').onchange=event=>{persist();const url=new URL(globalThis.location.href);url.searchParams.set('stage',event.target.value);globalThis.location.assign(url.href)};
+$('stageSelect').onchange=event=>{
+ const nextStage=event.target.value;
+ if(!persist()&&!window.confirm('現在の設計を保存できません。設計を書き出さずにステージを切り替えますか？')){
+  event.target.value=stage.id;return;
+ }
+ const url=new URL(globalThis.location.href);url.searchParams.set('stage',nextStage);globalThis.location.assign(url.href)};
 $('start').onclick=()=>run();$('weight').onclick=()=>run(true);$('reset').onclick=$('again').onclick=reset;
-$('clear').onclick=()=>{editor.clear();mode='road';changed('delete')};
-function undo(){if(!sim&&!orbit&&editor.undo())changed('delete')}
-function redo(){if(!sim&&!orbit&&editor.redo())changed()}
+$('clear').onclick=()=>{
+ const count=design.members.length;
+ if(sim||orbit||!count||!window.confirm(`この橋の部材${count}本を全部消しますか？ 「1つ戻す」で復元できます。`))return;
+ editor.clear();mode='road';changed('delete');status('橋を全部消しました。「1つ戻す」で復元できます。');
+};
+function restoreEditMode(){mode=editor.roads===editor.roadSlots?'wood':'road'}
+function undo(){
+ if(sim||orbit)return;
+ const before=editor.roads;
+ if(editor.undo()){if(before!==editor.roads)restoreEditMode();changed('delete')}
+}
+function redo(){
+ if(sim||orbit)return;
+ const before=editor.roads;
+ if(editor.redo()){if(before!==editor.roads)restoreEditMode();changed()}
+}
 $('undo').onclick=undo;$('redo').onclick=redo;
-for(const id of ['road','wood','select','pan'])$(id).onclick=()=>{mode=id;cancelSelection();updateUI();rebuildGuide()};
+for(const id of ['road','wood','select','pan','erase'])$(id).onclick=()=>{mode=id;cancelSelection();updateUI();rebuildGuide()};
 $('exportDesign').onclick=()=>{const blob=new Blob([JSON.stringify(editor.export(),null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=`rivet-shift-stage${stage.id}.json`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
 $('importDesign').onclick=()=>$('fileInput').click();$('fileInput').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{if(file.size>CONFIG.importMaxBytes)throw Error('ファイルが大きすぎます');const parsed=JSON.parse(await file.text());if(sim||orbit)throw Error('テスト中・回転表示中は読み込めません。編集に戻ってください');editor.load(parsed);mode=editor.roads===editor.roadSlots?'wood':'road';changed();status('設計を読み込みました。')}catch(error){status(`読み込みできません：${error.message}`);audio.effect('error')}e.target.value=''};
 const speeds=[.1,.25,.5,1,2,4,8];
@@ -489,12 +568,22 @@ $('replay').onclick=()=>{if(!play?.startReplay())return;clearEffects();shown=tru
 $('replayExit').onclick=()=>{if(play?.replay){play.replay=null;play.paused=true;clearEffects();showResult(false)}};
 for(const [id,x,zoom] of [['viewAll',CONFIG.valleyWidth/2,stageZoom],['viewLeft',0,stageZoom*1.6],['viewCenter',CONFIG.valleyWidth/2,stageZoom*1.6],['viewRight',CONFIG.valleyWidth,stageZoom*1.6]])$(id).onclick=()=>{follow=false;target.x=x;target.y=-2;target.zoom=zoom;clampView();updateUI()};
 $('follow').onclick=()=>{follow=!follow;updateUI()};$('orbit').onclick=()=>{orbit=!orbit;cancelSelection();if(!orbit){orbitYaw=0;orbitPitch=0}updateUI();rebuildGuide()};
-$('forceType').onchange=()=>{const force=$('forceType').checked;$('legendTitle').textContent=force?'力の種類と負荷':'部材の負荷率';$('legendLeft').textContent=force?'引張（青）':'余裕あり';$('legendRight').textContent=force?'圧縮（赤）':'破断寸前';$('legendGradient').style.background=force?'linear-gradient(90deg,#2185d5,#f7efdc,#e95943)':''};
+$('forceType').onchange=()=>{const force=$('forceType').checked;$('legendTitle').textContent=force?'力の種類と負荷':'現在の最大負荷';$('legendLeft').textContent=force?'← 引張 →（青）':'余裕あり';$('legendRight').textContent=force?'→ 圧縮 ←（赤）':'破断寸前';$('legendGradient').style.background=force?'linear-gradient(90deg,#2185d5,#f7efdc,#e95943)':''};
 $('panelToggle').onclick=()=>{$('panel').classList.toggle('collapsed');$('panelToggle').textContent=$('panel').classList.contains('collapsed')?'▶':'◀'};
 
 function deleteChosen(){if(sim||orbit||!chosen.size)return;if(editor.removeMany([...chosen]))changed('delete')}
 function copyChosen(cut=false){if(sim||orbit)return;const clip=editor.copy([...chosen]);if(!clip){status('コピーする木材を選択してください。');return}clipboard=clip;if(cut)deleteChosen();updateUI();status('木材をコピーしました。Ctrl+Vまたは貼り付けボタンで配置。')}
 function startPaste(){if(sim||orbit||!clipboard)return;cancelSelection();pasteMode=true;pasteFlip=false;mode='select';for(const m of clipboard.members)pasteGroup.add(barObject('wood',true));updateUI();if(hover)updatePaste(hover);status('マウスで配置、クリックで確定。Hで左右反転、Escでキャンセル。')}
+function selectAllWood(){
+ if(!editing())return;
+ cancelSelection();chosen.clear();
+ design.members.forEach((m,i)=>{if(m.material==='wood')chosen.add(i)});
+ highlightSelection();updateUI();
+}
+function flipClipboard(){if(pasteMode){pasteFlip=!pasteFlip;if(hover)updatePaste(hover)}}
+$('newStart').onclick=$('cancelPaste').onclick=()=>{cancelSelection();updateUI()};
+$('selectAll').onclick=selectAllWood;
+$('flipPaste').onclick=flipClipboard;
 $('deleteSelection').onclick=deleteChosen;$('copySelection').onclick=()=>copyChosen();$('pasteSelection').onclick=startPaste;
 function updatePaste(p){const proposal=editor.pasteProposal(clipboard,p,pasteFlip);if(!proposal.joints)return proposal;proposal.members.forEach((m,i)=>{positionBar(pasteGroup.children[i],proposal.joints[m.a],proposal.joints[m.b]);pasteGroup.children[i].userData.mat.color.set(proposal.reason?'#ef5546':'#ebca70')});return proposal}
 
@@ -506,53 +595,120 @@ function pickedIndex(objects,key){bridgeGroup.updateMatrixWorld(true);for(const 
 function nearestJoint(p){const hit=pickedIndex(jointVisuals,'jointIndex');if(hit>=0)return hit;let index=-1,distance=.5/view.zoom;design.joints.forEach((j,i)=>{const d=Math.hypot(p.x-j.x,p.y-j.y);if(d<distance){distance=d;index=i}});return index}
 function nearestMember(p,frame=null){const hit=pickedIndex(visuals.filter((_,i)=>!frame?.members[i].broken),'memberIndex');if(hit>=0)return hit;let index=-1,distance=.35/view.zoom;design.members.forEach((m,i)=>{if(frame?.members[i].broken)return;const a=frame?frame.joints[m.a]:design.joints[m.a],b=frame?frame.joints[m.b]:design.joints[m.b],dx=b.x-a.x,dy=b.y-a.y,t=Math.max(0,Math.min(1,((p.x-a.x)*dx+(p.y-a.y)*dy)/(dx*dx+dy*dy)));const d=Math.hypot(p.x-a.x-t*dx,p.y-a.y-t*dy);if(d<distance){distance=d;index=i}});return index}
 function hideTooltip(){$('tooltip').style.display='none'}
-function tooltip(e,text){$('tooltip').style.display='block';$('tooltip').style.left=Math.min(e.clientX+15,innerWidth-300)+'px';$('tooltip').style.top=Math.min(e.clientY+15,innerHeight-65)+'px';$('tooltip').textContent=text}
+function tooltip(e,text){$('tooltip').style.display='block';$('tooltip').style.left=Math.max(8,Math.min(e.clientX+15,innerWidth-300))+'px';$('tooltip').style.top=Math.min(e.clientY+15,innerHeight-65)+'px';$('tooltip').textContent=text}
 function updatePreview(p,e){if(!editing())return;if(pasteMode){const proposal=updatePaste(p);tooltip(e,proposal.reason||`木材 ${clipboard.members.length}本を貼り付け · Hで左右反転`);return}if(mode!=='wood'||selected===null){preview.visible=false;return}showTriangleHints(p);const b=editor.proposal(selected,p);if(!b)return;positionBar(preview,design.joints[selected],b);preview.visible=true;preview.userData.mat.color.set(b.reason?'#ef5546':'#d6af67');tooltip(e,`木材 ${Number(b.length.toFixed(2))}m・¥${Math.round(b.length*CONFIG.materials.wood.price)} ／ ${Number((b.angle*180/Math.PI).toFixed(1))}°${b.reason?' ／ '+b.reason:b.index>=0?' ／ 接合点につなぐ':b.triangleGuide?' ／ 三角形の頂点':''}`)}
 function panBy(dx,dy){target.x-=dx*38/(innerHeight*view.zoom);target.y+=dy*38/(innerHeight*view.zoom);follow=false;clampView()}
 function selectRect(a,b,add){if(!add)chosen.clear();const minX=Math.min(a.x,b.x),maxX=Math.max(a.x,b.x),minY=Math.min(a.y,b.y),maxY=Math.max(a.y,b.y);design.members.forEach((m,i)=>{if(m.material!=='wood')return;const points=[design.joints[m.a],design.joints[m.b]];if(points.every(p=>p.x>=minX&&p.x<=maxX&&p.y>=minY&&p.y<=maxY))chosen.add(i)});highlightSelection();updateUI()}
-const touches=new Map();let pinch=null;
+const touches=new Map();let pinch=null,touchPress=null;
+const touchDragThreshold=8;
 renderer.domElement.addEventListener('contextmenu',e=>e.preventDefault());
-renderer.domElement.addEventListener('pointerdown',e=>{
- if(e.pointerType==='touch'){touches.set(e.pointerId,{x:e.clientX,y:e.clientY});if(touches.size===2){const [a,b]=[...touches.values()];pinch={distance:Math.hypot(a.x-b.x,a.y-b.y),x:(a.x+b.x)/2,y:(a.y+b.y)/2};drag=null;cancelSelection();return}if(touches.size===1){renderer.domElement.setPointerCapture(e.pointerId);drag={type:'pan',x:e.clientX,y:e.clientY};return}}
- const p=world(e);if(!p)return;renderer.domElement.setPointerCapture(e.pointerId);
+function pressCanvas(e,p){
  if(e.button===1||spaceHeld||(mode==='pan'&&!orbit)){drag={type:'pan',x:e.clientX,y:e.clientY};e.preventDefault();return}
  if(orbit&&e.button===0){drag={type:'orbit',x:e.clientX,y:e.clientY};return}
  if(!editing()){if(sim&&e.button===0)drag={type:'pan',x:e.clientX,y:e.clientY};return}
  if(e.button===2){if(editor.remove(nearestMember(p)))changed('delete');return}if(e.button!==0)return;
  if(pasteMode){const result=updatePaste(p);if(result.reason){status(result.reason);audio.effect('error')}else if(editor.paste(clipboard,p,pasteFlip))changed();return}
+ if(mode==='erase'){if(editor.remove(nearestMember(p)))changed('delete');return}
  if(mode==='select'){drag={type:'select',x:e.clientX,y:e.clientY,start:p,add:e.shiftKey};return}
  if(mode==='road'){if(Math.abs(p.y)>.8||p.x<0||p.x>=CONFIG.valleyWidth)return;if(editor.addRoad(Math.floor(p.x/CONFIG.roadLength))){if(editor.roads===editor.roadSlots)mode='wood';changed();coachProgress()}else{status('その区間にはすでに部材があります。必要なら削除して置き直してください。');audio.effect('error')}return}
  if(selected===null){const j=nearestJoint(p);if(j>=0){selected=j;showSelection();updateUI();audio.effect('select')}return}
  if(Math.hypot(p.x-design.joints[selected].x,p.y-design.joints[selected].y)<.5/view.zoom){cancelSelection();updateUI();return}
  const b=editor.proposal(selected,p);if(b.reason){status(b.reason);audio.effect('error');return}
- const next=editor.addWood(selected,p);if(next>=0){design=editor.design;selected=next;rebuild();showSelection();preview.visible=false;hideTooltip();persist();audio.effect('place');coachProgress()}
+ const next=editor.addWood(selected,p);if(next>=0){design=editor.design;selected=next;rebuild();showSelection();updateUI();preview.visible=false;hideTooltip();persist();audio.effect('place');coachProgress()}
+}
+renderer.domElement.addEventListener('pointerdown',e=>{
+ const p=world(e);if(!p)return;
+ renderer.domElement.setPointerCapture(e.pointerId);
+ if(e.pointerType!=='touch'){pressCanvas(e,p);return}
+ touches.set(e.pointerId,{x:e.clientX,y:e.clientY});
+ if(touches.size===1){
+  touchPress={id:e.pointerId,x:e.clientX,y:e.clientY,point:p,aim:editing()&&(pasteMode||(mode==='wood'&&selected!==null))};
+  return;
+ }
+ touchPress=null;drag=null;
+ $('selectionRect').style.display='none';hideTooltip();preview.visible=false;
+ if(touches.size===2){
+  const [a,b]=touches.values();
+  pinch={distance:Math.hypot(a.x-b.x,a.y-b.y),x:(a.x+b.x)/2,y:(a.y+b.y)/2};
+ }
 });
 renderer.domElement.addEventListener('pointermove',e=>{
- if(e.pointerType==='touch'&&touches.has(e.pointerId)){touches.set(e.pointerId,{x:e.clientX,y:e.clientY});if(touches.size===2&&pinch){const [a,b]=[...touches.values()],distance=Math.hypot(a.x-b.x,a.y-b.y),x=(a.x+b.x)/2,y=(a.y+b.y)/2;target.zoom*=distance/Math.max(1,pinch.distance);panBy(x-pinch.x,y-pinch.y);pinch={distance,x,y};return}}
+ if(e.pointerType==='touch'&&touches.has(e.pointerId)){
+  touches.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(touches.size===2&&pinch){
+   const [a,b]=touches.values();
+   const distance=Math.hypot(a.x-b.x,a.y-b.y),x=(a.x+b.x)/2,y=(a.y+b.y)/2;
+   target.zoom*=distance/Math.max(1,pinch.distance);panBy(x-pinch.x,y-pinch.y);pinch={distance,x,y};return;
+  }
+  if(!touchPress||touchPress.id!==e.pointerId)return;
+  if(!drag&&Math.hypot(e.clientX-touchPress.x,e.clientY-touchPress.y)<touchDragThreshold&&!touchPress.aim)return;
+  if(!drag&&!touchPress.aim){
+   const type=orbit?'orbit':editing()&&mode==='select'?'select':'pan';
+   drag={type,x:touchPress.x,y:touchPress.y,start:touchPress.point,add:false};
+  }
+ }
  if(drag){const dx=e.clientX-drag.x,dy=e.clientY-drag.y;if(drag.type==='pan'){panBy(dx,dy);drag.x=e.clientX;drag.y=e.clientY}else if(drag.type==='orbit'){orbitYaw=THREE.MathUtils.clamp(orbitYaw+dx*.006,-35*Math.PI/180,35*Math.PI/180);orbitPitch=THREE.MathUtils.clamp(orbitPitch+dy*.004,-20*Math.PI/180,20*Math.PI/180);drag.x=e.clientX;drag.y=e.clientY}else{const r=$('selectionRect');r.style.display='block';r.style.left=Math.min(drag.x,e.clientX)+'px';r.style.top=Math.min(drag.y,e.clientY)+'px';r.style.width=Math.abs(dx)+'px';r.style.height=Math.abs(dy)+'px'}return}
  hover=world(e);if(!hover)return;
- if(sim){const i=nearestMember(hover,play.frame);if(i>=0){const m=play.frame.members[i];tooltip(e,`${m.force>=0?'引張':'圧縮'} ${(Math.abs(m.force)/1000).toFixed(1)}kN ／ 負荷 ${Math.round(m.load*100)}%`)}else hideTooltip();return}
+ if(sim){inspectMember(hover,e);return}
  renderer.domElement.style.cursor=orbit?'grab':mode==='pan'?'grab':mode==='select'?'crosshair':mode==='wood'?'crosshair':'pointer';hideTooltip();updatePreview(hover,e)
 });
-function pointerUp(e){touches.delete(e.pointerId);if(touches.size<2)pinch=null;if(drag?.type==='select'&&editing()){const p=world(e);if(p){if(Math.hypot(e.clientX-drag.x,e.clientY-drag.y)<5){const i=nearestMember(p);if(!drag.add)chosen.clear();if(i>=0&&design.members[i].material==='wood'){if(drag.add&&chosen.has(i))chosen.delete(i);else chosen.add(i)}highlightSelection();updateUI()}else selectRect(drag.start,p,drag.add)}}drag=null;$('selectionRect').style.display='none'}
-addEventListener('pointerup',pointerUp);addEventListener('pointercancel',()=>{drag=null;touches.clear();pinch=null;$('selectionRect').style.display='none'});
-renderer.domElement.addEventListener('pointerleave',()=>{hideTooltip();preview.visible=false});
+function inspectMember(p,e){
+ const i=nearestMember(p,play.frame);
+ if(i<0){hideTooltip();return}
+ const m=play.frame.members[i];
+ tooltip(e,`${m.force>=0?'← 引張 →':'→ 圧縮 ←'} ${(Math.abs(m.force)/1000).toFixed(1)}kN ／ 負荷 ${Math.round(m.load*100)}%`);
+}
+function pointerUp(e){
+ if(e.pointerType==='touch'){
+  if(!touches.delete(e.pointerId))return;
+  if(touches.size<2)pinch=null;
+  if(touchPress?.id!==e.pointerId)return;
+  const press=touchPress;touchPress=null;
+  if(!drag){
+   if(!press.aim&&Math.hypot(e.clientX-press.x,e.clientY-press.y)>=touchDragThreshold)return;
+   const p=world(e);
+   if(!p)return;
+   if(sim&&!orbit){inspectMember(p,e);return}
+   pressCanvas(e,p);
+  }
+ }
+ if(drag?.type==='select'&&editing()){
+  const p=world(e);
+  if(p){
+   if(Math.hypot(e.clientX-drag.x,e.clientY-drag.y)<5){
+    const i=nearestMember(p);
+    if(!drag.add)chosen.clear();
+    if(i>=0&&design.members[i].material==='wood'){
+     if(drag.add&&chosen.has(i))chosen.delete(i);else chosen.add(i);
+    }
+    highlightSelection();updateUI();
+   }else selectRect(drag.start,p,drag.add);
+  }
+ }
+ drag=null;$('selectionRect').style.display='none';
+}
+function cancelPointerInput(){
+ drag=null;touchPress=null;touches.clear();pinch=null;
+ $('selectionRect').style.display='none';
+}
+addEventListener('pointerup',pointerUp);addEventListener('pointercancel',cancelPointerInput);
+renderer.domElement.addEventListener('pointerleave',()=>{hover=null;hideTooltip();preview.visible=false});
 renderer.domElement.addEventListener('wheel',e=>{e.preventDefault();const before=world(e);target.zoom*=Math.exp(-e.deltaY*.001);clampView();view.zoom=target.zoom;updateCamera();const after=world(e);if(before&&after){target.x=view.x+before.x-after.x;target.y=view.y+before.y-after.y;view.x=target.x;view.y=target.y}clampView();view.zoom=target.zoom;updateCamera();follow=false},{passive:false});
 renderer.domElement.addEventListener('dblclick',fit);
 addEventListener('keydown',e=>{
- if(['INPUT','SELECT','TEXTAREA'].includes(e.target.tagName))return;const ctrl=e.ctrlKey||e.metaKey,k=e.key.toLowerCase();
+ if(['INPUT','SELECT','TEXTAREA','BUTTON','A','SUMMARY'].includes(e.target.tagName)||e.target.isContentEditable)return;const ctrl=e.ctrlKey||e.metaKey,k=e.key.toLowerCase();
  if(e.code==='Space'){e.preventDefault();if(!e.repeat){if(play)togglePause();else spaceHeld=true}return}
  if(['arrowleft','arrowright','arrowup','arrowdown','w','a','s','d'].includes(k)&&!ctrl){e.preventDefault();keys.add(k)}
  if(k==='f'&&!ctrl)fit();if(k==='escape'){cancelSelection();chosen.clear();highlightSelection();$('coach').style.display='none';updateUI()}
  if((k==='['||k===']')&&play&&!play.replay){const i=speeds.indexOf(play.scale);play.scale=speeds[THREE.MathUtils.clamp(i+(k==='['?-1:1),0,speeds.length-1)];updateUI()}
  if(!editing())return;
  if(ctrl&&k==='z'){e.preventDefault();e.shiftKey?redo():undo()}if(ctrl&&k==='y'){e.preventDefault();redo()}
- if(ctrl&&k==='a'){e.preventDefault();cancelSelection();chosen.clear();design.members.forEach((m,i)=>{if(m.material==='wood')chosen.add(i)});highlightSelection();updateUI()}
+ if(ctrl&&k==='a'){e.preventDefault();selectAllWood()}
  if(ctrl&&(k==='c'||k==='x')){e.preventDefault();copyChosen(k==='x')}if(ctrl&&k==='v'){e.preventDefault();startPaste()}
- if(k==='h'&&pasteMode){pasteFlip=!pasteFlip;if(hover)updatePaste(hover)}
- if(k==='delete'||k==='backspace'){e.preventDefault();if(chosen.size)deleteChosen();else if(hover&&editor.remove(nearestMember(hover)))changed('delete')}
+ if(k==='h')flipClipboard()
+ if((k==='delete'||k==='backspace')&&chosen.size){e.preventDefault();deleteChosen()}
 });
-addEventListener('keyup',e=>{keys.delete(e.key.toLowerCase());if(e.code==='Space')spaceHeld=false});addEventListener('blur',()=>{keys.clear();spaceHeld=false;drag=null});
+addEventListener('keyup',e=>{keys.delete(e.key.toLowerCase());if(e.code==='Space')spaceHeld=false});addEventListener('blur',()=>{keys.clear();spaceHeld=false;cancelPointerInput()});
 
 const coachTexts=[['① 道路を架けよう','空いている道路区間を5回クリック。道路はすべて同じ長さです。'],['② 補強の形を考えよう','木材を選び、始点からカーソルを動かして長さと向きを決めます。どんな形なら車を支えられるかな？'],['③ テストして、組み直そう','補強のない道路は自重で崩れます。テスト開始で色と最初の破断を観察し、形を変えて試そう。']];
 function showCoach(index=0){coachIndex=index;$('coachTitle').textContent=coachTexts[index][0];$('coachText').textContent=coachTexts[index][1];$('coachNext').textContent=index===2?'はじめる':'次へ';$('coach').style.display='block'}
@@ -569,10 +725,18 @@ function showResult(celebrate=true){
  if(!sim)return;shown=true;const success=sim.outcome==='success',debug=sim.outcome==='debug',stars=success?(cost()<=CONFIG.budget*.8?3:sim.breakCount===0?2:1):0;
  let best=readStore(BEST,null);if(success&&(!best||stars>best.stars||(stars===best.stars&&cost()<best.cost))){best={stars,cost:cost(),members:design.members.length};writeStore(BEST,best)}
  $('result').style.display='flex';$('resultTitle').textContent=success?'クリア！':debug?'荷重テスト完了':sim.failureTitle;$('stars').textContent=success?'★'.repeat(stars)+'☆'.repeat(3-stars):'';
- $('resultText').textContent=`${success?`${sim.cars.length}台すべてが無事に渡り切りました。`:debug?'中央1000kgの荷重テストが終わりました。':'どこから形が崩れたかな？ 接続の形を変えて試そう。'}\n使用予算 ¥${cost().toLocaleString()} ／ 部材 ${design.members.length}本 ／ 破断 ${sim.breakCount}本${play.firstBreak?`\n最初の破断：${play.firstBreak.time.toFixed(2)}秒・運河の左岸から${play.firstBreak.x.toFixed(1)}m`:''}`;
+ $('resultText').textContent=`${success?`${sim.cars.length}台すべてが無事に渡り切りました。`:debug?'中央1000kgの荷重テストが終わりました。':'どこから形が崩れたかな？ 接続の形を変えて試そう。'}\n使用予算 ¥${cost().toLocaleString()} ／ 部材 ${design.members.length}本 ／ 破断 ${sim.breakCount}本${play.firstBreak?`\n最初の破断：${play.firstBreak.material==='wood'?'木材':'道路'}・負荷 ${Math.round(play.firstBreak.load*100)}%・${play.firstBreak.time.toFixed(2)}秒・運河の左岸から${play.firstBreak.x.toFixed(1)}m`:''}`;
  $('best').textContent=best?`ベスト：${'★'.repeat(best.stars)} ／ ¥${best.cost.toLocaleString()} ／ ${best.members}本`:'';$('replay').disabled=!play.firstBreak;
+ $('copyStatus').textContent='';
+ $('again').focus?.();
  if(celebrate){audio.effect(success?'success':'failure');if(success){coastTime=0;coastX=sim.car.x;confetti()}}audio.nextBeat=0;updateUI();
 }
+$('copyResult').onclick=async()=>{
+ try{
+  await navigator.clipboard.writeText(`RIVET SHIFT ／ ${stage.name}\n${$('resultTitle').textContent}\n${$('resultText').textContent}`);
+  $('copyStatus').textContent='結果をコピーしました。';
+ }catch{$('copyStatus').textContent='コピーできませんでした。結果の文章を選択してコピーしてください。'}
+};
 const forcePale=new THREE.Color('#f7efdc');
 const colorStops=[new THREE.Color('#249be6'),new THREE.Color('#62c3b4'),new THREE.Color('#f2d150'),new THREE.Color('#f49a3f'),new THREE.Color('#ee4743')],stopValues=[0,.35,.55,.8,1];
 function loadColor(color,load,force){if($('forceType').checked){color.set(force>=0?'#2185d5':'#e95943');color.lerp(forcePale,.65*(1-Math.min(1,load)));return}const value=THREE.MathUtils.clamp(load,0,1);let i=0;while(i<3&&value>stopValues[i+1])i++;color.copy(colorStops[i]).lerp(colorStops[i+1],(value-stopValues[i])/(stopValues[i+1]-stopValues[i]))}
@@ -582,7 +746,7 @@ function animate(now){
  requestAnimationFrame(animate);if(document.hidden){last=now;return}const dt=Math.min((now-last)/1000,.1);last=now;elapsed+=dt;
  const dx=(keys.has('arrowright')||keys.has('d')?1:0)-(keys.has('arrowleft')||keys.has('a')?1:0),dy=(keys.has('arrowup')||keys.has('w')?1:0)-(keys.has('arrowdown')||keys.has('s')?1:0);if(dx||dy){target.x+=dx*dt*12/view.zoom;target.y+=dy*dt*10/view.zoom;follow=false;clampView()}
  let load=0;
- if(play){play.tick(dt);for(const event of play.events.splice(0))handleEvent(event);load=renderFrame(play.frame);if(sim.outcome&&!play.replay&&!shown)showResult();if(play.replay&&play.paused)status('スロー再生終了。「結果に戻る」または「やり直し」で編集へ。');
+ if(play){play.tick(dt);for(const event of play.events.splice(0))handleEvent(event);load=renderFrame(play.frame);if(sim.outcome&&!play.replay&&!shown)showResult();if(play.replay&&play.paused)status('スロー再生終了。「結果に戻る」または「橋の編集に戻る」を選べます。');
  const first=play.firstBreak;breakRing.visible=!!first&&play.frame.time>=first.time;if(breakRing.visible){breakRing.position.set(first.x,first.y,1.8);breakRing.material.opacity=.45+.55*Math.abs(Math.sin(elapsed*5))}
  if(sim.outcome==='success'&&!play.replay){if(!play.paused){coastTime=Math.min(2,coastTime+dt);coastX=sim.car.x+CONFIG.carSpeed*(coastTime-coastTime*coastTime/4)}carModels.forEach((model,index)=>{const x=sim.cars[index].x+CONFIG.carSpeed*(coastTime-coastTime*coastTime/4);model.group.position.x=x;model.shadow.position.x=x;model.wheels.forEach(wheel=>wheel.rotation.z=-x/.33)})}
  if(follow&&!sim.debug){const poses=play.frame.cars||[play.frame.car];const followed=poses.find(pose=>!pose.finished)||poses[poses.length-1];target.x=followed.x;target.y=THREE.MathUtils.clamp(followed.y-2,-9,6);clampView()}
@@ -596,7 +760,7 @@ function animate(now){
  target.yaw=orbit?orbitYaw:0;target.pitch=orbit?orbitPitch:0;const blend=1-Math.exp(-dt*9);for(const key of ['x','y','zoom','yaw','pitch'])view[key]+=(target[key]-view[key])*blend;
  shake*=Math.exp(-dt*8);updateCamera();updateJointHints();renderer.render(scene,camera);
 }
-rebuild();if(restoreMessage)status(restoreMessage);if(!readStore('tanigoe.guideSeen',false))showCoach();requestAnimationFrame(animate);
+rebuild();$('error').style.display='none';$('retryBoot').hidden=true;if(restoreMessage){status(restoreMessage);$('saveState').textContent=restoreMessage;}if(!readStore('tanigoe.guideSeen',false))showCoach();requestAnimationFrame(animate);
 
 </script>
 </body></html>

@@ -55,7 +55,7 @@ for (const [x, loaded, expected] of [
   [-1.2, false, '橋が自分の重さで崩れた'],
   [2, true, '車が乗ったとたん、橋が崩れた'],
   [CONFIG.valleyWidth * .85, true, 'あと一歩で対岸！'],
-  [CONFIG.valleyWidth * .79, true, '車が乗ったとたん、橋が崩れた'],
+  [CONFIG.valleyWidth * .79, true, '走行中に橋が崩れた'],
 ]) {
   const sim = new Simulation(new BridgeEditor().design);
   sim.car.x = x;
