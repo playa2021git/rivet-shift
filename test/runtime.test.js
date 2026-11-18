@@ -132,6 +132,47 @@ async function main(){
  elements.get('stageSelect').onchange({target:{value:testStage===1?'2':'1'}});
  assert.equal(new URL(location.lastAssignment).searchParams.get('stage'),testStage===1?'2':'1');
  assert.equal(JSON.parse(storage.get(game.storeKey)).stage,testStage);
+ const savedDesign=JSON.stringify(game.editor.design);
+ context.window.confirm=()=>false;
+ elements.get('clear').click();assert.equal(JSON.stringify(game.editor.design),savedDesign);
+ context.window.confirm=()=>true;
+ elements.get('clear').click();assert.equal(game.editor.roads,0);
+ elements.get('undo').click();assert.equal(JSON.stringify(game.editor.design),savedDesign);assert.equal(game.mode,'wood');
+ elements.get('redo').click();assert.equal(game.editor.roads,0);
+ function touchPoint(x,y,id=20){
+  const p=game.project(x,y);
+  return{clientX:p.x,clientY:p.y,button:0,pointerId:id,pointerType:'touch',preventDefault(){}};
+ }
+ function touchDown(e){for(const fn of canvas.handlers.pointerdown)fn(e)}
+ function touchUp(e){for(const fn of globalHandlers.pointerup)fn(e)}
+ function tap(x,y){const e=touchPoint(x,y);touchDown(e);touchUp(e)}
+ const touch=touchPoint(length*.5,0),second=touchPoint(length*1.5,0,21);
+ touchDown(touch);touchDown(second);touchUp(second);touchUp(touch);
+ assert.equal(game.editor.roads,0,'Pinching does not place a road');
+ for(let i=0;i<5;i++)tap(length*(i+.5),0);
+ assert.equal(game.editor.roads,5);assert.equal(game.mode,'wood');
+ tap(length,0);assert.notEqual(game.selected,null);
+ assert.equal(elements.get('newStart').hidden,false);
+ tap(length*1.5,length*Math.sqrt(3)/2);
+ assert.equal(game.editor.design.members.length,6);
+ elements.get('newStart').click();assert.equal(game.selected,null);
+ elements.get('select').click();
+ tap(length*1.25,length*Math.sqrt(3)/4);assert.equal(game.chosen.size,1);
+ elements.get('copySelection').click();elements.get('pasteSelection').click();
+ elements.get('flipPaste').click();tap(length*2,0);
+ assert.equal(game.editor.design.members.length,7,'Touch works with selection and flipped paste');
+ elements.get('erase').click();tap(length*.5,0);
+ assert.equal(game.editor.roads,4);elements.get('undo').click();assert.equal(game.editor.roads,5);
+ const e=touchPoint(length*.5,0);
+ for(const fn of canvas.handlers.pointermove)fn({...e,pointerType:'mouse'});
+ for(const fn of canvas.handlers.pointerleave)fn(e);
+ key('Delete');assert.equal(game.editor.roads,5,'Delete never uses an old hover target');
+ game.run();assert(game.play);
+ key(' ',{target:{tagName:'BUTTON'}});assert(!game.play.paused);
+ key(' ');assert(game.play.paused);
+ elements.get('orbit').click();elements.get('reset').click();
+ assert(!game.play);assert(!elements.get('start').disabled);assert.equal(game.target.yaw,0);
+ console.log('PASS: touch placement, pinch cancellation, range tool tap, flip and paste, touch deletion, confirmation, undo mode, scoped shortcuts, camera reset.');
  console.log('PASS: real UI handlers, raycast placement, hotkeys, pruning, redo, copy/paste, atomic range delete, autosave, 8× playback, pause/frame step, first-break replay, orbit edit lock.');
  console.log('PASS: Space-drag navigation, cursor-centred zoom, SE throttle/polyphony, opt-in BGM scheduling, independent mute and saved sound settings.');
  console.log('PASS: invalid saved sound settings are normalized; pan tool does not override orbit; pending imports cannot replace an active simulation.');
