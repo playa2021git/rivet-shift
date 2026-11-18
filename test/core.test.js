@@ -51,6 +51,19 @@ const firstWheelArrival=(4-CONFIG.wheelbase/2)/CONFIG.carSpeed;
 assert(selfWeight.breakCount>0,'Road-only bridge must break from self-weight');
 assert(selfWeight.time<firstWheelArrival,'Failure must occur before any car load reaches the bridge');
 console.log(`Unsupported road self-weight failure: ${selfWeight.time.toFixed(3)}s; earliest wheel arrival ${firstWheelArrival.toFixed(3)}s`);
+for (const [x, loaded, expected] of [
+  [-1.2, false, '橋が自分の重さで崩れた'],
+  [2, true, '車が乗ったとたん、橋が崩れた'],
+  [CONFIG.valleyWidth * .85, true, 'あと一歩で対岸！'],
+  [CONFIG.valleyWidth * .79, true, '車が乗ったとたん、橋が崩れた'],
+]) {
+  const sim = new Simulation(new BridgeEditor().design);
+  sim.car.x = x;
+  sim.carLoadedBridge = loaded;
+  while (!sim.outcome) sim.step(CONFIG.fixedDt);
+  assert.equal(sim.outcome, 'failure');
+  assert.equal(sim.failureTitle, expected, 'Use the position at loss of support, not at splashdown');
+}
 // Both building and JSON/paste validation must allow construction above/below old limits.
 const unrestricted=new BridgeEditor();
 unrestricted.addRoad(0);

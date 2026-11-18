@@ -72,6 +72,7 @@ async function main(){
  elements.get('pause').click();
  for(let i=3;i<400&&!game.play.sim.outcome;i++)game.animate(i*16.6667);
  assert.equal(game.play.sim.outcome,'failure');assert(game.play.firstBreak);
+ assert.equal(elements.get('resultTitle').textContent,game.play.sim.failureTitle);
  elements.get('replay').click();assert(game.play.replay);
  assert(Math.abs(game.play.frame.time-(Math.max(0,game.play.firstBreak.time-.5)))<.02);
  for(let i=400;i<420;i++)game.animate(i*16.6667);

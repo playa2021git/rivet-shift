@@ -43,7 +43,13 @@ class Simulation{
    vy:0,vx:this.config.carSpeed,spin:0
   }));
   this.car=this.cars[0];
-  this.time=0;this.debug=debug;this.outcome=null;this.events=[];this.maxLoad=0;this.breakCount=0;
+  this.time=0;this.debug=debug;this.outcome=null;this.carLoadedBridge=false;this.failureTitle=null;this.events=[];this.maxLoad=0;this.breakCount=0;
+ }
+ fail(car){
+  this.outcome='failure';
+  // Use the position where support was lost, before the car drifts during the fall.
+  const progress=(car.fallX??car.x)/this.config.valleyWidth;
+  this.failureTitle=!this.carLoadedBridge?'橋が自分の重さで崩れた':progress>=.8?'あと一歩で対岸！':'車が乗ったとたん、橋が崩れた';
  }
  roadAt(x){
   if(x<=0||x>=this.config.valleyWidth)return{y:0,a:null,b:null,t:0};
@@ -78,8 +84,9 @@ class Simulation{
      const rear=this.roadAt(car.x-this.config.wheelbase/2);
      const front=this.roadAt(car.x+this.config.wheelbase/2);
      if(!rear||!front||Math.abs(rear.y-front.y)>this.config.wheelbase||Math.min(rear.y,front.y)<-3){
-      car.falling=true;car.spin=-.65;this.events.push({type:'fall',carIndex:index});
+      car.falling=true;car.fallX=car.x;car.spin=-.65;this.events.push({type:'fall',carIndex:index});
      }else{
+      if(rear.a||front.a)this.carLoadedBridge=true;
       this.loadAt(rear,this.config.carMass*this.config.gravity/2);
       this.loadAt(front,this.config.carMass*this.config.gravity/2);
       car.y=(rear.y+front.y)/2+.52;
@@ -103,13 +110,16 @@ class Simulation{
    for(const [index,car] of this.cars.entries()){
     if(car.falling&&car.y<this.config.waterY+.3){
      this.events.push({type:'splash',x:car.x,y:this.config.waterY,carIndex:index});
-     this.outcome='failure';break;
+     this.fail(car);break;
     }
     if(!car.falling&&car.x-1.7>=this.config.valleyWidth)car.finished=true;
    }
    if(!this.outcome&&this.cars.every(car=>car.finished))this.outcome='success';
   }
-  if(!this.outcome&&this.time>=this.config.timeLimit)this.outcome=this.debug?'debug':'failure';
+  if(!this.outcome&&this.time>=this.config.timeLimit){
+   if(this.debug)this.outcome='debug';
+   else this.fail(this.cars.find(car=>!car.finished));
+  }
  }
 }
 function anchors(width=CONFIG.valleyWidth){return[0,width].flatMap(x=>[0,-3,-6,-9].map(y=>({x,y,fixed:true})))}
@@ -257,11 +267,12 @@ const bankReach=220,roadMarkMatrices=[];
 function instanceBatch(geometry,material,matrices){if(!matrices.length)return;const batch=new THREE.InstancedMesh(geometry,material,matrices.length);matrices.forEach((matrix,i)=>batch.setMatrixAt(i,matrix));batch.instanceMatrix.needsUpdate=true;scene.add(batch)}
 function transformMatrix(x,y,z,sx,sy,sz,rx=0,ry=0,rz=0){const object=new THREE.Object3D();object.position.set(x,y,z);object.scale.set(sx,sy,sz);object.rotation.set(rx,ry,rz);object.updateMatrix();return object.matrix.clone()}
 for(const [edge,dir] of [[0,-1],[CONFIG.valleyWidth,1]]){
- box(groundMat,edge+dir*bankReach/2,-18,-5,bankReach,36,300);
+ // The pavement forms the top surface; the ground ends at its underside.
+ box(groundMat,edge+dir*bankReach/2,-18.25,-5,bankReach,35.5,300);
  box(pavement,edge+dir*bankReach/2,-.25,-5,bankReach,.5,300);
  box(roadMat,edge+dir*bankReach/2,.03,0,bankReach,.16,2);
  for(const y of [-.3,-3.4,-6.5,-9.6,-12.7]){
-  box(quayMat,edge+dir*.12,y,-5,.24,.22,300);
+  box(quayMat,edge+dir*.11,y,-5,.24,.22,300);
  }
  for(let x=4;x<55;x+=8){
   const lampX=edge+dir*x;
@@ -296,10 +307,12 @@ instanceBatch(boxGeo,windowMat,windows);
 instanceBatch(boxGeo,trimMat,roofs);
 const cloudMat=mat('#edf8f5');
 for(let i=0;i<8;i++){const g=new THREE.Group();for(let j=0;j<3;j++)mesh(sphereGeo,cloudMat,j*2,Math.sin(j)*.3,0,2.5,1,1,g);g.position.set(-95+i*30,15+i%2*3,-40);scene.add(g);clouds.push(g)}
+const waveAmplitudeX=.06,waveAmplitudeZ=.035;
 const water=mesh(new THREE.PlaneGeometry(460,250,48,12),mat('#397f98',{transparent:true,opacity:.8,side:THREE.DoubleSide}),CONFIG.valleyWidth/2,CONFIG.waterY,0);
 water.rotation.x=-Math.PI/2;const waterBase=water.geometry.attributes.position.array.slice();
+const foamY=CONFIG.waterY+waveAmplitudeX+waveAmplitudeZ+.015;
 const foamMat=new THREE.MeshBasicMaterial({color:0xe3faf6,transparent:true,opacity:.55,depthWrite:false});
-for(const edge of [0,CONFIG.valleyWidth])for(let i=0;i<9;i++){const f=mesh(circleGeo,foamMat,edge+(edge===0?.45:-.45),CONFIG.waterY+.08,-10+i*2.2,.55,.2,1);f.rotation.x=-Math.PI/2}
+for(const edge of [0,CONFIG.valleyWidth])for(let i=0;i<9;i++){const f=mesh(circleGeo,foamMat,edge+(edge===0?.45:-.45),foamY,-10+i*2.2,.55,.2,1);f.rotation.x=-Math.PI/2}
 const goal=new THREE.Group();scene.add(goal);const goalX=CONFIG.valleyWidth+3;
 for(const x of [goalX-1,goalX+1])box(pinMat,x,1.5,-1.4,.12,3,.12,goal);
 box(white,goalX,3,-1.4,2.2,.6,.12,goal);
@@ -512,7 +525,7 @@ function updateEffects(dt){for(let i=debris.length-1;i>=0;i--){const d=debris[i]
 function showResult(celebrate=true){
  if(!sim)return;shown=true;const success=sim.outcome==='success',debug=sim.outcome==='debug',stars=success?(cost()<=CONFIG.budget*.8?3:sim.breakCount===0?2:1):0;
  let best=readStore(BEST,null);if(success&&(!best||stars>best.stars||(stars===best.stars&&cost()<best.cost))){best={stars,cost:cost(),members:design.members.length};writeStore(BEST,best)}
- $('result').style.display='flex';$('resultTitle').textContent=success?'クリア！':debug?'荷重テスト完了':'あと、ひと工夫！';$('stars').textContent=success?'★'.repeat(stars)+'☆'.repeat(3-stars):'';
+ $('result').style.display='flex';$('resultTitle').textContent=success?'クリア！':debug?'荷重テスト完了':sim.failureTitle;$('stars').textContent=success?'★'.repeat(stars)+'☆'.repeat(3-stars):'';
  $('resultText').textContent=`${success?`${sim.cars.length}台すべてが無事に渡り切りました。`:debug?'中央1000kgの荷重テストが終わりました。':'どこから形が崩れたかな？ 接続の形を変えて試そう。'}\n使用予算 ¥${cost().toLocaleString()} ／ 部材 ${design.members.length}本 ／ 破断 ${sim.breakCount}本${play.firstBreak?`\n最初の破断：${play.firstBreak.time.toFixed(2)}秒・運河の左岸から${play.firstBreak.x.toFixed(1)}m`:''}`;
  $('best').textContent=best?`ベスト：${'★'.repeat(best.stars)} ／ ¥${best.cost.toLocaleString()} ／ ${best.members}本`:'';$('replay').disabled=!play.firstBreak;
  if(celebrate){audio.effect(success?'success':'failure');if(success){coastTime=0;coastX=sim.car.x;confetti()}}audio.nextBeat=0;updateUI();
@@ -535,7 +548,7 @@ function animate(now){
  const effectiveDt=play?(play.paused?0:dt*(play.replay?.25:play.slowRemaining>0?.3:play.scale)):dt;updateEffects(Math.min(effectiveDt,.15));
  const testing=!!sim&&!sim.outcome&&!play.paused&&!play.replay;const driving=!!sim&&!sim.debug&&!play.frame.car.falling&&!play.paused&&!play.replay&&(!sim.outcome||(sim.outcome==='success'&&coastTime<2));audio.tick(driving,load,sim?.outcome==='success'?CONFIG.carSpeed*(1-coastTime/2):CONFIG.carSpeed,testing);
  for(const cloud of clouds){cloud.position.x+=dt*.2;if(cloud.position.x>145)cloud.position.x=-125}
- const positions=water.geometry.attributes.position;for(let i=0;i<positions.count;i++)positions.array[i*3+2]=Math.sin(waterBase[i*3]*.6+elapsed)*.06+Math.cos(waterBase[i*3+1]+elapsed*.7)*.035;positions.needsUpdate=true;
+ const positions=water.geometry.attributes.position;for(let i=0;i<positions.count;i++)positions.array[i*3+2]=Math.sin(waterBase[i*3]*.6+elapsed)*waveAmplitudeX+Math.cos(waterBase[i*3+1]+elapsed*.7)*waveAmplitudeZ;positions.needsUpdate=true;
  const flagPos=flag.geometry.attributes.position;for(let i=0;i<flagPos.count;i++)flagPos.array[i*3+2]=Math.sin(flagBase[i*3]*4-elapsed*(sim?.outcome==='success'?10:3))*.12*(flagBase[i*3]+.7);flagPos.needsUpdate=true;
  target.yaw=orbit?orbitYaw:0;target.pitch=orbit?orbitPitch:0;const blend=1-Math.exp(-dt*9);for(const key of ['x','y','zoom','yaw','pitch'])view[key]+=(target[key]-view[key])*blend;
  shake*=Math.exp(-dt*8);updateCamera();updateJointHints();renderer.render(scene,camera);
