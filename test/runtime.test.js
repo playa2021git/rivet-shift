@@ -28,7 +28,7 @@ async function main(){
  const location={href:`https://rivet-shift.test/?stage=${testStage}`,assign(url){this.lastAssignment=url}};
  const context={location,window:{AudioContext},document,THREE:{...THREE,WebGLRenderer:Renderer},localStorage:{getItem:key=>storage.get(key)??null,setItem:(key,value)=>storage.set(key,value)},innerWidth:1366,innerHeight:768,devicePixelRatio:1,performance:{now:()=>0},requestAnimationFrame(){},addEventListener:(type,handler)=>(globalHandlers[type]??=[]).push(handler),setTimeout:()=>0,Blob,URL,console};
  vm.createContext(context);vm.runInContext(core,context);
- vm.runInContext(source+`;window.testing={editor,view,target,audio,settings,carModels,storeKey:STORE,canvas:renderer.domElement,chosen,worldAt,updateCamera,animate,run,reset,showResult,startPaste,updatePaste,deleteChosen,copyChosen,get play(){return play},get mode(){return mode},get selected(){return selected},get pasteMode(){return pasteMode},project(x,y){const p=new THREE.Vector3(x,y,0).project(camera);return{x:(p.x+1)*innerWidth/2,y:(1-p.y)*innerHeight/2}}};`,context);
+ vm.runInContext(source+`;window.testing={editor,view,target,audio,settings,carModels,storeKey:STORE,canvas:renderer.domElement,chosen,worldAt,updateCamera,animate,jointHints,run,reset,showResult,startPaste,updatePaste,deleteChosen,copyChosen,get play(){return play},get mode(){return mode},get selected(){return selected},get pasteMode(){return pasteMode},project(x,y){const p=new THREE.Vector3(x,y,0).project(camera);return{x:(p.x+1)*innerWidth/2,y:(1-p.y)*innerHeight/2}}};`,context);
  const game=context.window.testing;
  assert.equal(game.settings.se,.35);assert.equal(game.settings.bgm,.5);assert.equal(game.settings.muted,false);assert.equal(game.settings.bgmMuted,false);
  function key(key,opts={}){for(const handler of globalHandlers.keydown??[])handler({key,code:key===' '?'Space':key,target:{tagName:'BODY'},preventDefault(){},...opts})}
@@ -37,6 +37,19 @@ async function main(){
  assert.equal(game.carModels.length,testStage===2?3:1);
  for(let i=0;i<5;i++)clickWorld(i*length+length/2,0);
  assert.equal(game.editor.roads,5);assert.equal(game.mode,'wood');
+ game.animate(1);
+ assert(game.jointHints.visible&&game.jointHints.children.every(hint=>hint.visible));
+ const opacity=game.jointHints.children[0].material.opacity;
+ game.animate(2);
+ assert.notEqual(game.jointHints.children[0].material.opacity,opacity);
+ clickWorld(length,0);
+ game.animate(3);
+ const jointHintAt=(x,y)=>game.jointHints.children.find(hint=>hint.position.x===x&&hint.position.y===y);
+ assert(jointHintAt(length,0).visible===false);
+ assert(jointHintAt(0,0).visible===false); // The two points already share a road member.
+ assert(jointHintAt(0,-3).visible);
+ assert(jointHintAt(length*5,0).visible===false);
+ key('Escape');
  // Select a real node, place a fixed-length wooden member, undo and redo it.
  clickWorld(length,0);assert.notEqual(game.selected,null);clickWorld(length*1.5,length*Math.sqrt(3)/2);
  assert.equal(game.editor.design.members.length,6);
@@ -52,7 +65,7 @@ async function main(){
  assert(storage.has(game.storeKey));
  elements.get('start').click();assert(game.play);
  elements.get('speed').value='8';elements.get('speed').onchange({target:elements.get('speed')});
- game.animate(16.6667);assert(game.play.sim.time>0.1);
+ game.animate(19.6667);assert(game.play.sim.time>0.1);
  elements.get('pause').click();assert(game.play.paused);
  const before=game.play.sim.time;game.animate(33.3334);assert.equal(game.play.sim.time,before);
  elements.get('step').click();assert(game.play.sim.time>before);

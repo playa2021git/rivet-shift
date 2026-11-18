@@ -8,7 +8,7 @@
 <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
 </head><body>
 <header><div class="brand">RIVET SHIFT<small>考えて、架けて、試そう。</small></div><div class="budget">予算の目安 <strong id="money"></strong><progress id="budget" value="0" max="1"></progress></div><nav><button class="start" id="start">▶ テスト開始</button><button id="reset">↶ やり直し</button><button id="clear">全部消す</button><button id="help" aria-label="遊び方">?</button><button id="mute" aria-label="効果音の消音">🔊</button></nav><details id="audioDetails"><summary>音の設定</summary><div id="audioSettings"><label>効果音<input id="seVolume" type="range" min="0" max="1" step=".01" aria-label="効果音の音量"></label><label>BGM<input id="bgmVolume" type="range" min="0" max=".5" step=".01" aria-label="BGMの音量"></label><button id="bgmToggle">🎵 BGMをつける</button><button id="bgmMute">BGM消音</button></div></details></header>
-<aside class="panel" id="panel"><button id="panelToggle" aria-label="操作パネルを折りたたむ">◀</button><div class="panelBody"><div class="eyebrow" id="stageName" style="margin-top:10px">ステージ 01</div><select id="stageSelect" aria-label="ステージ選択" style="width:100%;margin-top:8px"><option value="1">01 リバーサイド</option><option value="2">02 コンボイライン</option></select><h2>どんな形なら、支えられる？</h2><div class="tools"><button id="road">道路 5m</button><button id="wood">木材 最大7.5m</button><button id="select">▭ 選択</button><button id="pan">✋ 移動</button></div><p id="material"></p><strong id="buildCount"></strong><p id="selfWeight" style="margin:6px 0"></p><progress id="buildProgress" max="5" value="0"></progress><p>道路は空き区間をクリック。<br>木材は始点を選び、向きと距離を決めて配置。<br>既存の接合点に近づけると吸着します。<br>補強のない道路は自重で崩れます。</p><div class="history"><button id="undo">↶ 戻す</button><button id="redo">↷ 進める</button></div><div class="line"></div><span id="selectionCount">選択 0本</span><div class="selectionButtons"><button id="deleteSelection">選択を削除</button><button id="copySelection">コピー</button><button id="pasteSelection">貼り付け</button></div><div class="fileButtons"><button id="exportDesign">📤 設計を書き出す</button><button id="importDesign">📥 設計を読み込む</button><input id="fileInput" type="file" accept=".json,application/json" hidden></div><details style="margin-top:12px"><summary>荷重テスト</summary><button id="weight" style="margin-top:8px">中央に1000kg（車なし）</button></details><p>Space＋ドラッグで移動<br>右クリックで部材を削除<br>Escで接続を解除 ／ ?で操作一覧</p></div></aside>
+<aside class="panel" id="panel"><button id="panelToggle" aria-label="操作パネルを折りたたむ">◀</button><div class="panelBody"><div class="eyebrow" id="stageName" style="margin-top:10px">ステージ 01</div><select id="stageSelect" aria-label="ステージ選択" style="width:100%;margin-top:8px"><option value="1">01 リバーサイド</option><option value="2">02 コンボイライン</option></select><h2>どんな形なら、支えられる？</h2><div class="tools"><button id="road">道路 5m</button><button id="wood">木材 最大7.5m</button><button id="select">▭ 選択</button><button id="pan">✋ 移動</button></div><p id="material"></p><strong id="buildCount"></strong><p id="selfWeight" style="margin:6px 0"></p><progress id="buildProgress" max="5" value="0"></progress><p>道路は空き区間をクリック。<br>木材は始点を選び、向きと距離を決めて配置。<br>赤い輪の接合点に近づけると吸着します。<br>補強のない道路は自重で崩れます。</p><div class="history"><button id="undo">↶ 戻す</button><button id="redo">↷ 進める</button></div><div class="line"></div><span id="selectionCount">選択 0本</span><div class="selectionButtons"><button id="deleteSelection">選択を削除</button><button id="copySelection">コピー</button><button id="pasteSelection">貼り付け</button></div><div class="fileButtons"><button id="exportDesign">📤 設計を書き出す</button><button id="importDesign">📥 設計を読み込む</button><input id="fileInput" type="file" accept=".json,application/json" hidden></div><details style="margin-top:12px"><summary>荷重テスト</summary><button id="weight" style="margin-top:8px">中央に1000kg（車なし）</button></details><p>Space＋ドラッグで移動<br>右クリックで部材を削除<br>Escで接続を解除 ／ ?で操作一覧</p></div></aside>
 <div class="viewbar"><button id="viewAll">全体</button><button id="viewLeft">左岸</button><button id="viewCenter">中央</button><button id="viewRight">右岸</button><button id="follow">🎥 車を追う</button><button id="orbit">ぐるっと見る</button><label><input type="checkbox" id="forceType"> 力の種類</label></div>
 <div class="playbar"><button id="pause">⏸ 一時停止</button><label>速度 <select id="speed"><option value="0.1">0.1×</option><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option><option value="4">4×</option><option value="8">8×</option></select></label><button id="step">1コマ進める</button><label><input type="checkbox" id="autoSlow"> 破断時に自動スロー</label><strong id="clock">0.00秒</strong><button id="replayExit" hidden>結果に戻る</button></div>
 <div class="legend"><span id="legendTitle">部材の負荷率</span><strong id="peak" style="float:right">0%</strong><div class="gradient" id="legendGradient"></div><div class="labels"><span id="legendLeft">余裕あり</span><span id="legendRight">破断寸前</span></div></div>
@@ -135,6 +135,7 @@ class BridgeEditor{
  validPoint(p){return Number.isFinite(p.x)&&Number.isFinite(p.y)&&!(p.y<-.0001&&(p.x<-.0001||p.x>this.config.valleyWidth+.0001))}
  validSegment(a,b){if(!this.validPoint(a)||!this.validPoint(b))return false;const eps=.0001;if(a.y>=-eps&&b.y>=-eps)return true;let lo=0,hi=1;if(a.y>=-eps)lo=(-eps-a.y)/(b.y-a.y);else if(b.y>=-eps)hi=(-eps-a.y)/(b.y-a.y);const x0=a.x+(b.x-a.x)*lo,x1=a.x+(b.x-a.x)*hi;return Math.min(x0,x1)>=-eps&&Math.max(x0,x1)<=this.config.valleyWidth+eps}
 
+ canReachWood(a,b){return this.validWoodLength(Math.hypot(b.x-a.x,b.y-a.y))&&this.validSegment(a,b)}
  proposal(start,p){
  const a=this.design.joints[start];if(!a)return null;
  const dx=p.x-a.x,dy=p.y-a.y;
@@ -145,7 +146,7 @@ class BridgeEditor{
  // 接合点へは、長さと角度の刻みを外れても端点をぴったり合わせる。
  this.design.joints.forEach((j,i)=>{
   const distance=Math.hypot(j.x-p.x,j.y-p.y);
-  if(i!==start&&distance<nearest&&this.validWoodLength(Math.hypot(j.x-a.x,j.y-a.y))&&this.validSegment(a,j)){
+  if(i!==start&&distance<nearest&&this.canReachWood(a,j)){
    nearest=distance;b={x:j.x,y:j.y};index=i;
   }
  });
@@ -318,10 +319,31 @@ const breakRing=mesh(new THREE.TorusGeometry(.75,.075,6,28),new THREE.MeshBasicM
 const directionDots=new THREE.Group();scene.add(directionDots);const dotMaterial=new THREE.MeshBasicMaterial({color:0xf1cc79,transparent:true,opacity:.65,depthTest:false});
 for(let i=0;i<Math.round(2*Math.PI/CONFIG.angleStep);i++){const dot=mesh(sphereGeo,dotMaterial,Math.cos(i*CONFIG.angleStep),Math.sin(i*CONFIG.angleStep),1.4,.09,.09,.09,directionDots);dot.renderOrder=3}directionDots.visible=false;
 function rebuildGuide(){clearBars(guide);if(sim||mode!=='road'||orbit)return;for(let i=0;i<editor.roadSlots;i++){if(editor.roadExists(i))continue;const g=barObject('road',true);positionBar(g,{x:i*CONFIG.roadLength,y:0},{x:(i+1)*CONFIG.roadLength,y:0});g.userData.mat.color.set('#edbd4c');guide.add(g)}}
+const jointHints=new THREE.Group();
+scene.add(jointHints);
+const jointHintGeometry=new THREE.RingGeometry(.16,.29,24);
+const jointHintMaterial=new THREE.MeshBasicMaterial({color:0xe4635b,transparent:true,depthTest:false,depthWrite:false});
+const reducedMotion=globalThis.matchMedia?.('(prefers-reduced-motion: reduce)');
+function updateJointHints(){
+ jointHints.visible=mode==='wood'&&editing()&&!pasteMode;
+ if(!jointHints.visible)return;
+ jointHintMaterial.opacity=reducedMotion?.matches ? .72 : .65+.20*Math.sin(elapsed*2*Math.PI/3);
+ const start=design.joints[selected];
+ const connected=new Set();
+ if(start)for(const {a,b} of design.members){
+  if(a===selected)connected.add(b);
+  if(b===selected)connected.add(a);
+ }
+ jointHints.children.forEach((hint,i)=>{
+  hint.visible=!start||(i!==selected&&!connected.has(i)&&editor.canReachWood(start,design.joints[i]));
+ });
+}
 function rebuild(){
  clearBars(bridgeGroup);for(const o of bridgeShadows)scene.remove(o);bridgeShadows.length=0;
  visuals=design.members.map((m,i)=>{const g=barObject(m.material);g.userData.memberIndex=i;positionBar(g,design.joints[m.a],design.joints[m.b]);if(chosen.has(i))g.userData.mat.color.set('#f5ce4d');bridgeGroup.add(g);const shadow=mesh(circleGeo,shadowMat,g.position.x,CONFIG.waterY+.12,0,g.scale.x*.55,.7,1);shadow.rotation.x=-Math.PI/2;bridgeShadows.push(shadow);return g});
  jointVisuals=design.joints.map((j,i)=>{const g=new THREE.Group();g.userData.jointIndex=i;for(const z of [-1.07,1.07]){const p=mesh(pinGeo,j.fixed?pinMat:jointMat,0,0,z,1,1,1,g);p.rotation.x=Math.PI/2}if(j.fixed)box(pinMat,0,0,-1.26,.46,.46,.16,g).rotation.z=Math.PI/4;g.position.set(j.x,j.y,0);bridgeGroup.add(g);return g});
+ jointHints.clear();
+ for(const j of design.joints)mesh(jointHintGeometry,jointHintMaterial,j.x,j.y,0,1,1,1,jointHints).renderOrder=4;
  rebuildGuide();updateUI();
 }
 function persist(){if(!writeStore(STORE,editor.export()))status('設計を自動保存できません。書き出しをご利用ください。')}
@@ -516,7 +538,7 @@ function animate(now){
  const positions=water.geometry.attributes.position;for(let i=0;i<positions.count;i++)positions.array[i*3+2]=Math.sin(waterBase[i*3]*.6+elapsed)*.06+Math.cos(waterBase[i*3+1]+elapsed*.7)*.035;positions.needsUpdate=true;
  const flagPos=flag.geometry.attributes.position;for(let i=0;i<flagPos.count;i++)flagPos.array[i*3+2]=Math.sin(flagBase[i*3]*4-elapsed*(sim?.outcome==='success'?10:3))*.12*(flagBase[i*3]+.7);flagPos.needsUpdate=true;
  target.yaw=orbit?orbitYaw:0;target.pitch=orbit?orbitPitch:0;const blend=1-Math.exp(-dt*9);for(const key of ['x','y','zoom','yaw','pitch'])view[key]+=(target[key]-view[key])*blend;
- shake*=Math.exp(-dt*8);updateCamera();renderer.render(scene,camera);
+ shake*=Math.exp(-dt*8);updateCamera();updateJointHints();renderer.render(scene,camera);
 }
 rebuild();if(restoreMessage)status(restoreMessage);if(!readStore('tanigoe.guideSeen',false))showCoach();requestAnimationFrame(animate);
 
