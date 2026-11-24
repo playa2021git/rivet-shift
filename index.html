@@ -28,7 +28,7 @@ button:focus-visible,summary:focus-visible{outline:3px solid #285268;outline-off
 <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
 </head><body>
 <header><div class="brand">RIVET SHIFT<small>考えて、架けて、試そう。</small></div><div class="budget">予算の目安 <strong id="money"></strong><progress id="budget" value="0" max="1"></progress></div><nav><div class="startControl"><button class="start" id="start" aria-describedby="startHint">▶ 車を走らせる</button><span id="startHint" aria-live="polite"></span></div><button id="reset">橋の編集に戻る</button><button id="help" aria-label="遊び方">?</button><button id="mute" aria-label="効果音の消音">🔊</button></nav><details id="audioDetails"><summary>音の設定</summary><div id="audioSettings"><label>効果音<input id="seVolume" type="range" min="0" max="1" step=".01" aria-label="効果音の音量"></label><label>BGM<input id="bgmVolume" type="range" min="0" max=".5" step=".01" aria-label="BGMの音量"></label><button id="bgmToggle">🎵 BGMをつける</button><button id="bgmMute">BGM消音</button></div></details></header>
-<aside class="panel" id="panel"><button id="panelToggle" aria-label="操作パネルを折りたたむ">◀</button><div class="panelBody"><div class="eyebrow" id="stageName" style="margin-top:10px">ステージ 01</div><select id="stageSelect" aria-label="ステージ選択" style="width:100%;margin-top:8px"><option value="1">01 リバーサイド</option><option value="2">02 コンボイライン</option></select><h2>どんな形なら、支えられる？</h2><div class="tools"><button id="road">道路 5m</button><button id="wood">木材 最大7.5m</button><button id="select">▭ 選択</button><button id="pan">✋ 移動</button><button id="erase">削除</button><button id="moveJoint">接合点を動かす</button></div><button id="newStart" hidden>始点を選び直す</button><p id="material"></p><strong id="buildCount"></strong><p id="selfWeight" style="margin:6px 0"></p><progress id="buildProgress" max="5" value="0"></progress><p>道路は空き区間をクリック。<br>木材は始点を選び、向きと距離を決めて配置。<br>赤い輪は接合点。水色の点に合わせると、同じ長さの木材2本で三角形を作れます。<br>補強のない道路は自重で崩れます。</p><div class="history"><button id="undo">↶ 1つ戻す</button><button id="redo">↷ 進める</button></div><div class="line"></div><span id="selectionCount">選択 0本</span><div class="selectionButtons"><button id="deleteSelection">選択を削除</button><button id="copySelection">コピー</button><button id="pasteSelection">貼り付け</button><button id="selectAll">木材を全選択</button><button id="flipPaste" hidden>左右反転</button><button id="cancelPaste" hidden>貼り付けを解除</button></div><div class="fileButtons"><button id="exportDesign">📤 設計を書き出す</button><button id="importDesign">📥 設計を読み込む</button><input id="fileInput" type="file" accept=".json,application/json" hidden></div><details style="margin-top:12px"><summary>荷重テスト</summary><button id="weight" style="margin-top:8px">中央に1000kg（車なし）</button></details><p>Space＋ドラッグで移動<br>右クリックで部材を削除<br>Escで接続を解除 ／ ?で操作一覧</p><p id="saveState" role="status"></p><button id="clear">🗑 この橋を全部消す</button></div></aside>
+<aside class="panel" id="panel"><button id="panelToggle" aria-label="操作パネルを折りたたむ">◀</button><div class="panelBody"><div class="eyebrow" id="stageName" style="margin-top:10px">ステージ 01</div><select id="stageSelect" aria-label="ステージ選択" style="width:100%;margin-top:8px"><option value="1">01 リバーサイド</option><option value="2">02 コンボイライン</option></select><h2>どんな形なら、支えられる？</h2><div class="tools"><button id="road">道路 5m</button><button id="wood">木材 最大7.5m</button><button id="select">▭ 選択</button><button id="pan">✋ 移動</button><button id="erase">削除</button><button id="moveJoint">接合点を動かす</button></div><button id="newStart" hidden>始点を選び直す</button><p id="material"></p><strong id="buildCount"></strong><p id="selfWeight" style="margin:6px 0"></p><progress id="buildProgress" max="5" value="0"></progress><p>道路は空き区間をクリック。<br>木材は始点を選び、向きと距離を決めて配置。<br>赤い輪は接合点。水色の点に合わせると、同じ長さの木材2本で三角形を作れます。<br>補強のない道路は自重で崩れます。</p><div class="history"><button id="undo">↶ 1つ戻す</button><button id="redo">↷ 進める</button></div><div class="line"></div><span id="selectionCount">選択 0本</span><div class="selectionButtons"><button id="deleteSelection">選択を削除</button><button id="copySelection">コピー</button><button id="pasteSelection">貼り付け</button><button id="selectAll">木材を全選択</button><button id="flipPaste" hidden>左右反転</button><button id="cancelPaste" hidden>貼り付けを解除</button></div><div class="fileButtons"><button id="exportDesign">📤 設計を書き出す</button><button id="importDesign">📥 設計を読み込む</button><input id="fileInput" type="file" accept=".json,application/json" hidden></div><details style="margin-top:12px"><summary>荷重テスト</summary><button id="weight" style="margin-top:8px">中央に1000kg（車なし）</button></details><p>Space＋ドラッグで移動<br>右クリックで部材を削除<br>Escで接続を解除 ／ ?で操作一覧</p><p id="saveState" role="status"></p><button id="clear">🗑 この橋を全部消す</button><button id="recoverDesign" hidden>消去・読み込み前の橋を復元</button></div></aside>
 <div class="viewbar"><button id="viewAll">全体</button><button id="viewLeft">左岸</button><button id="viewCenter">中央</button><button id="viewRight">右岸</button><button id="follow">🎥 車を追う</button><button id="orbit">ぐるっと見る</button><label><input type="checkbox" id="forceType"> 力の種類</label></div>
 <div class="playbar"><button id="pause">⏸ 一時停止</button><label>速度 <select id="speed"><option value="0.1">0.1×</option><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option><option value="4">4×</option><option value="8">8×</option></select></label><button id="step">1コマ進める</button><label><input type="checkbox" id="autoSlow"> 破断時に自動スロー</label><strong id="clock">0.00秒</strong><small id="speedHint" hidden>処理速度に応じて再生が遅くなる場合があります</small><button id="replayExit" hidden>結果に戻る</button></div>
 <div class="legend"><span id="legendTitle">現在の最大負荷</span><strong id="peak" style="float:right">0%</strong><div class="gradient" id="legendGradient"></div><div class="labels"><span id="legendLeft">余裕あり</span><span id="legendRight">破断寸前</span></div></div>
@@ -312,8 +312,15 @@ const settings={se:savedVolume(savedSettings?.se,.35,1),bgm:savedVolume(savedSet
 // BGMは保存設定にかかわらず、このページで明示的に押すまで再生しない。
 let musicEnabled=false;
 const editor=new BridgeEditor();
-let restoreMessage='';
-try{const saved=readStore(STORE,null);if(saved){editor.load(saved);editor.history=[];restoreMessage='前回の設計を復元しました。'}}catch{restoreMessage='保存された設計を読み込めませんでした。JSONファイルから復元できます。'}
+let restoreMessage='',recoveryDesign=null,designRevision=0,importRequest=0;
+try{
+ const saved=readStore(STORE,null);
+ if(saved){
+  editor.load(saved);editor.history=[];
+  recoveryDesign=saved.recovery??null;
+  restoreMessage='前回の設計を復元しました。';
+ }
+}catch{restoreMessage='保存された設計を読み込めませんでした。JSONファイルから復元できます。'}
 design=editor.design;
 let mode=editor.roads===editor.roadSlots?'wood':'road',selected=null,hover=null,drag=null,play=null,sim=null;
 let elapsed=0,shake=0,shown=false,coastTime=0,coastX=0,clipboard=null,pasteMode=false,pasteFlip=false;
@@ -471,7 +478,8 @@ function rebuild(){
  rebuildGuide();updateUI();
 }
 function persist(){
- const saved=writeStore(STORE,editor.export());
+ designRevision++;
+ const saved=writeStore(STORE,{...editor.export(),recovery:recoveryDesign});
  $('saveState').textContent=saved?'この端末に保存済み':'保存できません。設計を書き出してください。';
  return saved;
 }
@@ -543,6 +551,8 @@ function updateUI(){
  const roadsLeft=editor.roadSlots-editor.roads;
  $('startHint').textContent=roadsLeft>0?`道路をあと${roadsLeft}枚置くと走行できます。`:'';
  $('reset').hidden=!sim;
+ $('recoverDesign').hidden=!recoveryDesign;
+ $('recoverDesign').disabled=!!sim||orbit;
  $('newStart').hidden=sim||orbit||mode!=='wood'||selected===null;
  $('selectAll').disabled=!!sim||orbit||!wood;
  $('flipPaste').hidden=$('cancelPaste').hidden=!pasteMode;
@@ -554,8 +564,9 @@ function updateUI(){
  for(const id of ['start','weight'])$(id).disabled=!!sim||editor.roads<editor.roadSlots||orbit;
  for(const id of ['deleteSelection','copySelection'])$(id).disabled=!!sim||orbit||!chosen.size;
  $('pasteSelection').disabled=!!sim||orbit||!clipboard;
- $('pause').disabled=!play;$('step').disabled=!play;$('pause').textContent=play?.paused?'▶ 再開':'⏸ 一時停止';
- $('speed').value=play?.replay?0.25:(play?.scale??1);$('replayExit').hidden=!play?.replay;$('speed').disabled=!play||!!play.replay;
+ const canPlay=!!play&&(!!play.replay||!sim.outcome);
+ $('pause').disabled=!canPlay;$('step').disabled=!canPlay;$('pause').textContent=play?.paused?'▶ 再開':'⏸ 一時停止';
+ $('speed').value=play?.replay?0.25:(play?.scale??1);$('replayExit').hidden=!play?.replay;$('speed').disabled=!canPlay||!!play.replay;
  $('follow').classList.toggle('active',follow);$('orbit').classList.toggle('active',orbit);$('orbit').textContent=orbit?'編集に戻る':'ぐるっと見る';
  $('selectionCount').textContent=`選択 ${chosen.size}本`;
  if(!sim)status(orbit?'ドラッグで回転。編集するには「編集に戻る」。':mode==='road'?'空いている道路区間をクリック。補強の形は、自分で考えて試そう。':mode==='wood'?(selected===null?'赤い輪を押して木材の始点を選びます。':'置きたい先を押します。水色の点で左右対称の三角形を作れます。'):mode==='moveJoint'?'赤い輪をドラッグして接合点を動かします。':mode==='erase'?'消したい部材を押してください。':mode==='select'?'ドラッグで範囲選択。Shiftで追加、Deleteで削除、Ctrl+C / Vでコピー。':'Space＋ドラッグでも移動できます。Fキーで全体表示。');
@@ -573,9 +584,21 @@ $('start').onclick=()=>run();$('weight').onclick=()=>run(true);$('reset').onclic
 $('clear').onclick=()=>{
  const count=design.members.length;
  if(sim||orbit||!count||!window.confirm(`この橋の部材${count}本を全部消しますか？ 「1つ戻す」で復元できます。`))return;
- editor.clear();mode='road';changed('delete');status('橋を全部消しました。「1つ戻す」で復元できます。');
+ recoveryDesign=editor.export();
+ editor.clear();mode='road';changed('delete');
+ status('橋を消去しました。「1つ戻す」または「消去・読み込み前の橋を復元」で戻せます。');
 };
 function restoreEditMode(){mode=editor.roads===editor.roadSlots?'wood':'road'}
+$('recoverDesign').onclick=()=>{
+ if(sim||orbit||!recoveryDesign)return;
+ if(design.members.length&&!window.confirm('現在の橋を、保存していた橋に置き換えますか？'))return;
+ try{
+  const before=editor.export();
+  editor.load(recoveryDesign);
+  recoveryDesign=before.design.members.length?before:null;
+  restoreEditMode();changed();status('消去・読み込み前の橋を復元しました。');
+ }catch{status('以前の橋を復元できませんでした。現在の橋はそのままです。')}
+};
 function undo(){
  if(sim||orbit)return;
  const before=editor.roads;
@@ -589,13 +612,30 @@ function redo(){
 $('undo').onclick=undo;$('redo').onclick=redo;
 for(const id of ['road','wood','select','pan','erase','moveJoint'])$(id).onclick=()=>{mode=id;cancelSelection();updateUI();rebuildGuide()};
 $('exportDesign').onclick=()=>{const blob=new Blob([JSON.stringify(editor.export(),null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=`rivet-shift-stage${stage.id}.json`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
-$('importDesign').onclick=()=>$('fileInput').click();$('fileInput').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{if(file.size>CONFIG.importMaxBytes)throw Error('ファイルが大きすぎます');const parsed=JSON.parse(await file.text());if(sim||orbit)throw Error('テスト中・回転表示中は読み込めません。編集に戻ってください');editor.load(parsed);mode=editor.roads===editor.roadSlots?'wood':'road';changed();status('設計を読み込みました。')}catch(error){status(`読み込みできません：${error.message}`);audio.effect('error')}e.target.value=''};
+$('importDesign').onclick=()=>$('fileInput').click();$('fileInput').onchange=async e=>{
+ const file=e.target.files[0];if(!file)return;
+ const request=++importRequest,revision=designRevision;
+ e.target.value='';
+ try{
+  if(file.size>CONFIG.importMaxBytes)throw Error('ファイルが大きすぎます');
+  const parsed=JSON.parse(await file.text());
+  if(request!==importRequest)return;
+  if(sim||orbit)throw Error('テスト中・回転表示中は読み込めません。編集に戻ってください');
+  if(revision!==designRevision)throw Error('読み込み中に設計が変わりました。もう一度ファイルを選んでください');
+  const before=editor.export();
+  editor.load(parsed);
+  if(before.design.members.length)recoveryDesign=before;
+  restoreEditMode();changed();status('設計を読み込みました。');
+ }catch(error){
+  if(request===importRequest){status(`読み込みできません：${error.message}`);audio.effect('error')}
+ }
+};
 const speeds=[.1,.25,.5,1,2,4,8];
-function togglePause(){if(!play)return;play.paused=!play.paused;updateUI()}
-$('pause').onclick=togglePause;$('speed').onchange=e=>{if(play)play.scale=+e.target.value};$('step').onclick=()=>{if(play){play.frameStep();updateUI()}};
+function togglePause(){if(!play||(!play.replay&&sim.outcome))return;play.paused=!play.paused;updateUI()}
+$('pause').onclick=togglePause;$('speed').onchange=e=>{if(play)play.scale=+e.target.value};$('step').onclick=()=>{if(play&&(play.replay||!sim.outcome)){play.frameStep();updateUI()}};
 $('autoSlow').onchange=e=>{if(play)play.autoSlow=e.target.checked};
-$('replay').onclick=()=>{if(!play?.startReplay())return;clearEffects();shown=true;coastTime=0;$('result').style.display='none';follow=false;fit();updateUI();status('崩壊を0.25倍速で再生中。赤いリングが最初の破断位置です。')};
-$('replayExit').onclick=()=>{if(play?.replay){play.replay=null;play.paused=true;clearEffects();showResult(false)}};
+$('replay').onclick=()=>{if(!play?.startReplay())return;clearEffects();shown=true;coastTime=0;shake=0;$('result').style.display='none';follow=false;fit();updateUI();status('崩壊を0.25倍速で再生中。赤いリングが最初の破断位置です。')};
+$('replayExit').onclick=()=>{if(play?.replay){play.replay=null;play.paused=true;play.events.length=0;clearEffects();shake=0;renderFrame(play.frame);showResult(false)}};
 for(const [id,x,zoom] of [['viewAll',CONFIG.valleyWidth/2,stageZoom],['viewLeft',0,stageZoom*1.6],['viewCenter',CONFIG.valleyWidth/2,stageZoom*1.6],['viewRight',CONFIG.valleyWidth,stageZoom*1.6]])$(id).onclick=()=>{follow=false;target.x=x;target.y=-2;target.zoom=zoom;clampView();updateUI()};
 $('follow').onclick=()=>{follow=!follow;updateUI()};$('orbit').onclick=()=>{orbit=!orbit;cancelSelection();if(!orbit){orbitYaw=0;orbitPitch=0}updateUI();rebuildGuide()};
 $('forceType').onchange=()=>{const force=$('forceType').checked;$('legendTitle').textContent=force?'力の種類と負荷':'現在の最大負荷';$('legendLeft').textContent=force?'← 引張 →（青）':'余裕あり';$('legendRight').textContent=force?'→ 圧縮 ←（赤）':'破断寸前';$('legendGradient').style.background=force?'linear-gradient(90deg,#2185d5,#f7efdc,#e95943)':''};
@@ -778,7 +818,7 @@ addEventListener('keydown',e=>{
  if(e.code==='Space'){e.preventDefault();if(!e.repeat){if(play)togglePause();else spaceHeld=true}return}
  if(['arrowleft','arrowright','arrowup','arrowdown','w','a','s','d'].includes(k)&&!ctrl){e.preventDefault();keys.add(k)}
  if(k==='f'&&!ctrl)fit();if(k==='escape'){cancelSelection();chosen.clear();highlightSelection();$('coach').style.display='none';updateUI()}
- if((k==='['||k===']')&&play&&!play.replay){const i=speeds.indexOf(play.scale);play.scale=speeds[THREE.MathUtils.clamp(i+(k==='['?-1:1),0,speeds.length-1)];updateUI()}
+ if((k==='['||k===']')&&play&&!play.replay&&!sim.outcome){const i=speeds.indexOf(play.scale);play.scale=speeds[THREE.MathUtils.clamp(i+(k==='['?-1:1),0,speeds.length-1)];updateUI()}
  if(!editing())return;
  if(ctrl&&k==='z'){e.preventDefault();e.shiftKey?redo():undo()}if(ctrl&&k==='y'){e.preventDefault();redo()}
  if(ctrl&&k==='a'){e.preventDefault();selectAllWood()}
