@@ -28,7 +28,7 @@ button:focus-visible,summary:focus-visible{outline:3px solid #285268;outline-off
 <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
 </head><body>
 <header><div class="brand">RIVET SHIFT<small>考えて、架けて、試そう。</small></div><div class="budget">予算の目安 <strong id="money"></strong><progress id="budget" value="0" max="1"></progress></div><nav><div class="startControl"><button class="start" id="start" aria-describedby="startHint">▶ 車を走らせる</button><span id="startHint" aria-live="polite"></span></div><button id="reset">橋の編集に戻る</button><button id="help" aria-label="遊び方">?</button><button id="mute" aria-label="効果音の消音">🔊</button></nav><details id="audioDetails"><summary>音の設定</summary><div id="audioSettings"><label>効果音<input id="seVolume" type="range" min="0" max="1" step=".01" aria-label="効果音の音量"></label><label>BGM<input id="bgmVolume" type="range" min="0" max=".5" step=".01" aria-label="BGMの音量"></label><button id="bgmToggle">🎵 BGMをつける</button><button id="bgmMute">BGM消音</button></div></details></header>
-<aside class="panel" id="panel"><button id="panelToggle" aria-label="操作パネルを折りたたむ">◀</button><div class="panelBody"><div class="eyebrow" id="stageName" style="margin-top:10px">ステージ 01</div><select id="stageSelect" aria-label="ステージ選択" style="width:100%;margin-top:8px"><option value="1">01 リバーサイド</option><option value="2">02 コンボイライン</option></select><h2>どんな形なら、支えられる？</h2><div class="tools"><button id="road">道路 5m</button><button id="wood">木材 最大7.5m</button><button id="select">▭ 選択</button><button id="pan">✋ 移動</button><button id="erase">削除</button></div><button id="newStart" hidden>始点を選び直す</button><p id="material"></p><strong id="buildCount"></strong><p id="selfWeight" style="margin:6px 0"></p><progress id="buildProgress" max="5" value="0"></progress><p>道路は空き区間をクリック。<br>木材は始点を選び、向きと距離を決めて配置。<br>赤い輪は接合点。水色の点に合わせると、同じ長さの木材2本で三角形を作れます。<br>補強のない道路は自重で崩れます。</p><div class="history"><button id="undo">↶ 1つ戻す</button><button id="redo">↷ 進める</button></div><div class="line"></div><span id="selectionCount">選択 0本</span><div class="selectionButtons"><button id="deleteSelection">選択を削除</button><button id="copySelection">コピー</button><button id="pasteSelection">貼り付け</button><button id="selectAll">木材を全選択</button><button id="flipPaste" hidden>左右反転</button><button id="cancelPaste" hidden>貼り付けを解除</button></div><div class="fileButtons"><button id="exportDesign">📤 設計を書き出す</button><button id="importDesign">📥 設計を読み込む</button><input id="fileInput" type="file" accept=".json,application/json" hidden></div><details style="margin-top:12px"><summary>荷重テスト</summary><button id="weight" style="margin-top:8px">中央に1000kg（車なし）</button></details><p>Space＋ドラッグで移動<br>右クリックで部材を削除<br>Escで接続を解除 ／ ?で操作一覧</p><p id="saveState" role="status"></p><button id="clear">🗑 この橋を全部消す</button></div></aside>
+<aside class="panel" id="panel"><button id="panelToggle" aria-label="操作パネルを折りたたむ">◀</button><div class="panelBody"><div class="eyebrow" id="stageName" style="margin-top:10px">ステージ 01</div><select id="stageSelect" aria-label="ステージ選択" style="width:100%;margin-top:8px"><option value="1">01 リバーサイド</option><option value="2">02 コンボイライン</option></select><h2>どんな形なら、支えられる？</h2><div class="tools"><button id="road">道路 5m</button><button id="wood">木材 最大7.5m</button><button id="select">▭ 選択</button><button id="pan">✋ 移動</button><button id="erase">削除</button><button id="moveJoint">接合点を動かす</button></div><button id="newStart" hidden>始点を選び直す</button><p id="material"></p><strong id="buildCount"></strong><p id="selfWeight" style="margin:6px 0"></p><progress id="buildProgress" max="5" value="0"></progress><p>道路は空き区間をクリック。<br>木材は始点を選び、向きと距離を決めて配置。<br>赤い輪は接合点。水色の点に合わせると、同じ長さの木材2本で三角形を作れます。<br>補強のない道路は自重で崩れます。</p><div class="history"><button id="undo">↶ 1つ戻す</button><button id="redo">↷ 進める</button></div><div class="line"></div><span id="selectionCount">選択 0本</span><div class="selectionButtons"><button id="deleteSelection">選択を削除</button><button id="copySelection">コピー</button><button id="pasteSelection">貼り付け</button><button id="selectAll">木材を全選択</button><button id="flipPaste" hidden>左右反転</button><button id="cancelPaste" hidden>貼り付けを解除</button></div><div class="fileButtons"><button id="exportDesign">📤 設計を書き出す</button><button id="importDesign">📥 設計を読み込む</button><input id="fileInput" type="file" accept=".json,application/json" hidden></div><details style="margin-top:12px"><summary>荷重テスト</summary><button id="weight" style="margin-top:8px">中央に1000kg（車なし）</button></details><p>Space＋ドラッグで移動<br>右クリックで部材を削除<br>Escで接続を解除 ／ ?で操作一覧</p><p id="saveState" role="status"></p><button id="clear">🗑 この橋を全部消す</button></div></aside>
 <div class="viewbar"><button id="viewAll">全体</button><button id="viewLeft">左岸</button><button id="viewCenter">中央</button><button id="viewRight">右岸</button><button id="follow">🎥 車を追う</button><button id="orbit">ぐるっと見る</button><label><input type="checkbox" id="forceType"> 力の種類</label></div>
 <div class="playbar"><button id="pause">⏸ 一時停止</button><label>速度 <select id="speed"><option value="0.1">0.1×</option><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option><option value="4">4×</option><option value="8">8×</option></select></label><button id="step">1コマ進める</button><label><input type="checkbox" id="autoSlow"> 破断時に自動スロー</label><strong id="clock">0.00秒</strong><small id="speedHint" hidden>処理速度に応じて再生が遅くなる場合があります</small><button id="replayExit" hidden>結果に戻る</button></div>
 <div class="legend"><span id="legendTitle">現在の最大負荷</span><strong id="peak" style="float:right">0%</strong><div class="gradient" id="legendGradient"></div><div class="labels"><span id="legendLeft">余裕あり</span><span id="legendRight">破断寸前</span></div></div>
@@ -166,6 +166,28 @@ class BridgeEditor{
  validSegment(a,b){if(!this.validPoint(a)||!this.validPoint(b))return false;const eps=.0001;if(a.y>=-eps&&b.y>=-eps)return true;let lo=0,hi=1;if(a.y>=-eps)lo=(-eps-a.y)/(b.y-a.y);else if(b.y>=-eps)hi=(-eps-a.y)/(b.y-a.y);const x0=a.x+(b.x-a.x)*lo,x1=a.x+(b.x-a.x)*hi;return Math.min(x0,x1)>=-eps&&Math.max(x0,x1)<=this.config.valleyWidth+eps}
 
  canReachWood(a,b){return this.validWoodLength(Math.hypot(b.x-a.x,b.y-a.y))&&this.validSegment(a,b)}
+ canMoveJoint(index){
+  const joint=this.design.joints[index];
+  return !!joint&&!joint.fixed&&!this.design.members.some(m=>m.material==='road'&&(m.a===index||m.b===index));
+ }
+ jointMoveIssue(index,p){
+  if(!this.canMoveJoint(index))return '道路の接合点と両岸の固定点は動かせません。';
+  if(!this.validPoint(p))return 'この場所には接合点を置けません。';
+  if(this.design.joints.some((j,i)=>i!==index&&Math.hypot(j.x-p.x,j.y-p.y)<.0001))return '別の接合点と重なっています。';
+  for(const m of this.design.members){
+   if(m.a!==index&&m.b!==index)continue;
+   const other=this.design.joints[m.a===index?m.b:m.a];
+   if(!this.validWoodLength(Math.hypot(other.x-p.x,other.y-p.y)))return `木材の長さは ${this.woodMinLength}〜${this.woodMaxLength}m にしてください。`;
+   if(!this.validSegment(other,p))return '木材が崖を通る位置には動かせません。';
+  }
+  return '';
+ }
+ moveJoint(index,p){
+  if(this.jointMoveIssue(index,p))return false;
+  const joint=this.design.joints[index];
+  if(Math.hypot(joint.x-p.x,joint.y-p.y)<.0001)return false;
+  this.save();joint.x=p.x;joint.y=p.y;return true;
+ }
  triangleApexes(start,p){
  const a=this.design.joints[start];
  const halfRoad=this.config.roadLength/2;
@@ -396,6 +418,11 @@ const dark=mat('#304c53');for(let i=0;i<6;i++)box(i%2?dark:white,goalX-.9+i*.32,
 const flag=mesh(new THREE.PlaneGeometry(1.4,.85,6,2),mat('#f2b946',{side:THREE.DoubleSide}),goalX+1.7,2.5,-1.4);
 box(pinMat,goalX+1,2,-1.4,.07,3.5,.07);const flagBase=flag.geometry.attributes.position.array.slice();
 const bridgeGroup=new THREE.Group(),guide=new THREE.Group(),pasteGroup=new THREE.Group();scene.add(bridgeGroup,guide,pasteGroup);
+const movePreview=new THREE.Group();
+scene.add(movePreview);
+const movePointMaterial=new THREE.MeshBasicMaterial({color:0x79efe2,depthTest:false,depthWrite:false});
+const movePoint=mesh(sphereGeo,movePointMaterial,0,0,0,.24,.24,.24);
+movePoint.renderOrder=6;movePoint.visible=false;
 let visuals=[],jointVisuals=[];
 function barObject(material,ghost=false){const g=new THREE.Group();const m=(material==='road'?roadMat:woodMat).clone();if(ghost){m.transparent=true;m.opacity=.45;m.depthWrite=false}
  if(material==='road'){box(m,0,0,0,1,.15,1.8,g);for(let i=0;i<3;i++)box(white,(i-1)*.29,.085,0,.12,.015,.065,g)}else for(const z of [-.95,.95])box(m,0,0,z,1,.23,.23,g);
@@ -419,7 +446,7 @@ const jointHintGeometry=new THREE.RingGeometry(.16,.29,24);
 const jointHintMaterial=new THREE.MeshBasicMaterial({color:0xe4635b,transparent:true,depthTest:false,depthWrite:false});
 const reducedMotion=globalThis.matchMedia?.('(prefers-reduced-motion: reduce)');
 function updateJointHints(){
- jointHints.visible=mode==='wood'&&editing()&&!pasteMode;
+ jointHints.visible=(mode==='wood'||mode==='moveJoint')&&editing()&&!pasteMode;
  if(!jointHints.visible)return;
  jointHintMaterial.opacity=reducedMotion?.matches ? .72 : .65+.20*Math.sin(elapsed*2*Math.PI/3);
  const start=design.joints[selected];
@@ -429,7 +456,7 @@ function updateJointHints(){
   if(b===selected)connected.add(a);
  }
  jointHints.children.forEach((hint,i)=>{
-  hint.visible=!start||(i!==selected&&!connected.has(i)&&editor.canReachWood(start,design.joints[i]));
+  hint.visible=mode==='moveJoint'?hint.userData.movable:!start||(i!==selected&&!connected.has(i)&&editor.canReachWood(start,design.joints[i]));
  });
 }
 function rebuild(){
@@ -437,7 +464,10 @@ function rebuild(){
  visuals=design.members.map((m,i)=>{const g=barObject(m.material);g.userData.memberIndex=i;positionBar(g,design.joints[m.a],design.joints[m.b]);if(chosen.has(i))g.userData.mat.color.set('#f5ce4d');bridgeGroup.add(g);const shadow=mesh(circleGeo,shadowMat,g.position.x,CONFIG.waterY+.12,0,g.scale.x*.55,.7,1);shadow.rotation.x=-Math.PI/2;bridgeShadows.push(shadow);return g});
  jointVisuals=design.joints.map((j,i)=>{const g=new THREE.Group();g.userData.jointIndex=i;for(const z of [-1.07,1.07]){const p=mesh(pinGeo,j.fixed?pinMat:jointMat,0,0,z,1,1,1,g);p.rotation.x=Math.PI/2}if(j.fixed)box(pinMat,0,0,-1.26,.46,.46,.16,g).rotation.z=Math.PI/4;g.position.set(j.x,j.y,0);bridgeGroup.add(g);return g});
  jointHints.clear();
- for(const j of design.joints)mesh(jointHintGeometry,jointHintMaterial,j.x,j.y,0,1,1,1,jointHints).renderOrder=4;
+ design.joints.forEach((j,i)=>{
+  const hint=mesh(jointHintGeometry,jointHintMaterial,j.x,j.y,0,1,1,1,jointHints);
+  hint.renderOrder=4;hint.userData.movable=editor.canMoveJoint(i);
+ });
  rebuildGuide();updateUI();
 }
 function persist(){
@@ -446,7 +476,7 @@ function persist(){
  return saved;
 }
 function changed(sound='place'){design=editor.design;cancelSelection();chosen.clear();rebuild();persist();audio.effect(sound)}
-function cancelSelection(){selected=null;pasteMode=false;preview.visible=false;marker.visible=false;directionDots.visible=false;triangleHints.visible=false;clearBars(pasteGroup);hideTooltip()}
+function cancelSelection(){cancelJointDrag();selected=null;pasteMode=false;preview.visible=false;marker.visible=false;directionDots.visible=false;triangleHints.visible=false;clearBars(pasteGroup);hideTooltip()}
 function showSelection(){if(selected===null)return;const a=design.joints[selected];marker.position.set(a.x,a.y,1.3);marker.visible=true;directionDots.position.set(a.x,a.y,0);for(const [i,dot] of directionDots.children.entries()){const angle=i*CONFIG.angleStep;dot.position.x=editor.woodMaxLength*Math.cos(angle);dot.position.y=editor.woodMaxLength*Math.sin(angle)}directionDots.visible=true;showTriangleHints();
 }
 function showTriangleHints(p){
@@ -518,8 +548,8 @@ function updateUI(){
  $('flipPaste').hidden=$('cancelPaste').hidden=!pasteMode;
  $('speedHint').hidden=!play;$('budget').value=amount/CONFIG.budget;
  $('buildCount').textContent=`道路 ${editor.roads} / ${editor.roadSlots}枚　木材 ${wood}本`;$('buildProgress').max=editor.roadSlots;$('buildProgress').value=editor.roads;$('selfWeight').textContent=`橋の自重 ${Math.round(structuralMass()).toLocaleString()}kg ／ 車 ${CONFIG.carMass}kg × ${CONFIG.carCount}台（合計${(CONFIG.carMass*CONFIG.carCount).toLocaleString()}kg）`;$('stageName').textContent=`ステージ ${String(stage.id).padStart(2,'0')} ／ ${stage.name}・${CONFIG.valleyWidth}m`;$('stageSelect').value=stage.id;$('road').textContent=`道路 ${CONFIG.roadLength}m`;$('wood').textContent=`木材 最大${editor.woodMaxLength}m`;
- $('material').textContent=mode==='road'?`道路 ${CONFIG.roadLength}m・¥${editor.roadPrice.toLocaleString()}・${CONFIG.roadLength*CONFIG.materials.road.density}kg / 枚`:mode==='wood'?`木材 ${editor.woodMinLength}〜${editor.woodMaxLength}m（${editor.woodStep}m刻み）・¥${CONFIG.materials.wood.price}/m・${CONFIG.materials.wood.density}kg/m`:mode==='select'?'ドラッグで木材をまとめて選択。':mode==='erase'?'消したい部材を押してください。1つ戻すで復元できます。':'ドラッグ、矢印キー、WASDで移動。';
- for(const id of ['road','wood','select','pan','erase']){$(id).classList.toggle('active',mode===id);$(id).disabled=!!sim||orbit}
+ $('material').textContent=mode==='road'?`道路 ${CONFIG.roadLength}m・¥${editor.roadPrice.toLocaleString()}・${CONFIG.roadLength*CONFIG.materials.road.density}kg / 枚`:mode==='wood'?`木材 ${editor.woodMinLength}〜${editor.woodMaxLength}m（${editor.woodStep}m刻み）・¥${CONFIG.materials.wood.price}/m・${CONFIG.materials.wood.density}kg/m`:mode==='select'?'ドラッグで木材をまとめて選択。':mode==='moveJoint'?'赤い輪の接合点をドラッグ。道路の端と両岸の固定点は動きません。':mode==='erase'?'消したい部材を押してください。1つ戻すで復元できます。':'ドラッグ、矢印キー、WASDで移動。';
+ for(const id of ['road','wood','select','pan','erase','moveJoint']){$(id).classList.toggle('active',mode===id);$(id).disabled=!!sim||orbit}
  for(const id of ['clear','undo','redo','importDesign'])$(id).disabled=!!sim||orbit||(id==='undo'&&!editor.history.length)||(id==='redo'&&!editor.future.length);
  for(const id of ['start','weight'])$(id).disabled=!!sim||editor.roads<editor.roadSlots||orbit;
  for(const id of ['deleteSelection','copySelection'])$(id).disabled=!!sim||orbit||!chosen.size;
@@ -528,7 +558,7 @@ function updateUI(){
  $('speed').value=play?.replay?0.25:(play?.scale??1);$('replayExit').hidden=!play?.replay;$('speed').disabled=!play||!!play.replay;
  $('follow').classList.toggle('active',follow);$('orbit').classList.toggle('active',orbit);$('orbit').textContent=orbit?'編集に戻る':'ぐるっと見る';
  $('selectionCount').textContent=`選択 ${chosen.size}本`;
- if(!sim)status(orbit?'ドラッグで回転。編集するには「編集に戻る」。':mode==='road'?'空いている道路区間をクリック。補強の形は、自分で考えて試そう。':mode==='wood'?(selected===null?'赤い輪を押して木材の始点を選びます。':'置きたい先を押します。水色の点で左右対称の三角形を作れます。'):mode==='erase'?'消したい部材を押してください。':mode==='select'?'ドラッグで範囲選択。Shiftで追加、Deleteで削除、Ctrl+C / Vでコピー。':'Space＋ドラッグでも移動できます。Fキーで全体表示。');
+ if(!sim)status(orbit?'ドラッグで回転。編集するには「編集に戻る」。':mode==='road'?'空いている道路区間をクリック。補強の形は、自分で考えて試そう。':mode==='wood'?(selected===null?'赤い輪を押して木材の始点を選びます。':'置きたい先を押します。水色の点で左右対称の三角形を作れます。'):mode==='moveJoint'?'赤い輪をドラッグして接合点を動かします。':mode==='erase'?'消したい部材を押してください。':mode==='select'?'ドラッグで範囲選択。Shiftで追加、Deleteで削除、Ctrl+C / Vでコピー。':'Space＋ドラッグでも移動できます。Fキーで全体表示。');
 }
 function clearEffects(){for(const d of debris){scene.remove(d.obj);d.obj.userData.mat?.dispose()}debris.length=0;for(const p of particles){scene.remove(p.obj);if(p.ownMat)p.obj.material.dispose()}particles.length=0;splashBatch.count=0}
 function reset(){play=null;sim=null;shown=false;coastTime=0;shake=0;follow=false;fit();Object.assign(view,target);updateCamera();cancelSelection();chosen.clear();clearEffects();breakRing.visible=false;$('result').style.display='none';drawCars(carModels.map((_,index)=>({x:-4-index*CONFIG.carSpacing,y:.52,angle:0,falling:false})));rebuild();$('peak').textContent='0%';$('clock').textContent='0.00秒';}
@@ -557,7 +587,7 @@ function redo(){
  if(editor.redo()){if(before!==editor.roads)restoreEditMode();changed()}
 }
 $('undo').onclick=undo;$('redo').onclick=redo;
-for(const id of ['road','wood','select','pan','erase'])$(id).onclick=()=>{mode=id;cancelSelection();updateUI();rebuildGuide()};
+for(const id of ['road','wood','select','pan','erase','moveJoint'])$(id).onclick=()=>{mode=id;cancelSelection();updateUI();rebuildGuide()};
 $('exportDesign').onclick=()=>{const blob=new Blob([JSON.stringify(editor.export(),null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=`rivet-shift-stage${stage.id}.json`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
 $('importDesign').onclick=()=>$('fileInput').click();$('fileInput').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{if(file.size>CONFIG.importMaxBytes)throw Error('ファイルが大きすぎます');const parsed=JSON.parse(await file.text());if(sim||orbit)throw Error('テスト中・回転表示中は読み込めません。編集に戻ってください');editor.load(parsed);mode=editor.roads===editor.roadSlots?'wood':'road';changed();status('設計を読み込みました。')}catch(error){status(`読み込みできません：${error.message}`);audio.effect('error')}e.target.value=''};
 const speeds=[.1,.25,.5,1,2,4,8];
@@ -602,12 +632,46 @@ function selectRect(a,b,add){if(!add)chosen.clear();const minX=Math.min(a.x,b.x)
 const touches=new Map();let pinch=null,touchPress=null;
 const touchDragThreshold=8;
 renderer.domElement.addEventListener('contextmenu',e=>e.preventDefault());
+function beginJointDrag(e,p){
+ if(drag?.type==='joint')return false;
+ const index=nearestJoint(p);
+ if(!editor.canMoveJoint(index)){
+  if(index>=0)status('道路の接合点と両岸の固定点は動かせません。');
+  return false;
+ }
+ const joint=design.joints[index];
+ const neighbors=[];
+ for(const m of design.members){
+  if(m.a!==index&&m.b!==index)continue;
+  neighbors.push({point:design.joints[m.a===index?m.b:m.a],bar:barObject('wood',true)});
+ }
+ for(const {bar} of neighbors)movePreview.add(bar);
+ drag={type:'joint',id:e.pointerId,index,neighbors,dx:joint.x-p.x,dy:joint.y-p.y};
+ previewJointDrag(e,p);
+ return true;
+}
+function previewJointDrag(e,p){
+ const next={x:p.x+drag.dx,y:p.y+drag.dy};
+ const issue=editor.jointMoveIssue(drag.index,next);
+ const color=issue?'#ef5546':'#79efe2';
+ for(const {point,bar} of drag.neighbors){
+  positionBar(bar,point,next);bar.userData.mat.color.set(color);
+ }
+ movePoint.position.set(next.x,next.y,1.4);movePoint.visible=true;movePointMaterial.color.set(color);
+ tooltip(e,issue||'指やボタンを離すと移動します。');
+ return {next,issue};
+}
+function cancelJointDrag(){
+ if(drag?.type!=='joint')return;
+ drag=null;clearBars(movePreview);movePoint.visible=false;hideTooltip();
+}
 function pressCanvas(e,p){
  if(e.button===1||spaceHeld||(mode==='pan'&&!orbit)){drag={type:'pan',x:e.clientX,y:e.clientY};e.preventDefault();return}
  if(orbit&&e.button===0){drag={type:'orbit',x:e.clientX,y:e.clientY};return}
  if(!editing()){if(sim&&e.button===0)drag={type:'pan',x:e.clientX,y:e.clientY};return}
  if(e.button===2){if(editor.remove(nearestMember(p)))changed('delete');return}if(e.button!==0)return;
  if(pasteMode){const result=updatePaste(p);if(result.reason){status(result.reason);audio.effect('error')}else if(editor.paste(clipboard,p,pasteFlip))changed();return}
+ if(mode==='moveJoint'){beginJointDrag(e,p);return}
  if(mode==='erase'){if(editor.remove(nearestMember(p)))changed('delete');return}
  if(mode==='select'){drag={type:'select',x:e.clientX,y:e.clientY,start:p,add:e.shiftKey};return}
  if(mode==='road'){if(Math.abs(p.y)>.8||p.x<0||p.x>=CONFIG.valleyWidth)return;if(editor.addRoad(Math.floor(p.x/CONFIG.roadLength))){if(editor.roads===editor.roadSlots)mode='wood';changed();coachProgress()}else{status('その区間にはすでに部材があります。必要なら削除して置き直してください。');audio.effect('error')}return}
@@ -623,9 +687,10 @@ renderer.domElement.addEventListener('pointerdown',e=>{
  touches.set(e.pointerId,{x:e.clientX,y:e.clientY});
  if(touches.size===1){
   touchPress={id:e.pointerId,x:e.clientX,y:e.clientY,point:p,aim:editing()&&(pasteMode||(mode==='wood'&&selected!==null))};
+  if(editing()&&mode==='moveJoint')beginJointDrag(e,p);
   return;
  }
- touchPress=null;drag=null;
+ touchPress=null;cancelJointDrag();drag=null;
  $('selectionRect').style.display='none';hideTooltip();preview.visible=false;
  if(touches.size===2){
   const [a,b]=touches.values();
@@ -646,6 +711,10 @@ renderer.domElement.addEventListener('pointermove',e=>{
    const type=orbit?'orbit':editing()&&mode==='select'?'select':'pan';
    drag={type,x:touchPress.x,y:touchPress.y,start:touchPress.point,add:false};
   }
+ }
+ if(drag?.type==='joint'){
+  if(drag.id===e.pointerId){const p=world(e);if(p)previewJointDrag(e,p)}
+  return;
  }
  if(drag){const dx=e.clientX-drag.x,dy=e.clientY-drag.y;if(drag.type==='pan'){panBy(dx,dy);drag.x=e.clientX;drag.y=e.clientY}else if(drag.type==='orbit'){orbitYaw=THREE.MathUtils.clamp(orbitYaw+dx*.006,-35*Math.PI/180,35*Math.PI/180);orbitPitch=THREE.MathUtils.clamp(orbitPitch+dy*.004,-20*Math.PI/180,20*Math.PI/180);drag.x=e.clientX;drag.y=e.clientY}else{const r=$('selectionRect');r.style.display='block';r.style.left=Math.min(drag.x,e.clientX)+'px';r.style.top=Math.min(drag.y,e.clientY)+'px';r.style.width=Math.abs(dx)+'px';r.style.height=Math.abs(dy)+'px'}return}
  hover=world(e);if(!hover)return;
@@ -672,6 +741,15 @@ function pointerUp(e){
    pressCanvas(e,p);
   }
  }
+ if(drag?.type==='joint'){
+  if(drag.id!==e.pointerId)return;
+  const index=drag.index,p=editing()?world(e):null;
+  const result=p?previewJointDrag(e,p):null;
+  cancelJointDrag();
+  if(result?.issue)status(result.issue);
+  else if(result&&editor.moveJoint(index,result.next))changed();
+  return;
+ }
  if(drag?.type==='select'&&editing()){
   const p=world(e);
   if(p){
@@ -688,7 +766,7 @@ function pointerUp(e){
  drag=null;$('selectionRect').style.display='none';
 }
 function cancelPointerInput(){
- drag=null;touchPress=null;touches.clear();pinch=null;
+ cancelJointDrag();drag=null;touchPress=null;touches.clear();pinch=null;
  $('selectionRect').style.display='none';
 }
 addEventListener('pointerup',pointerUp);addEventListener('pointercancel',cancelPointerInput);
