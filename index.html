@@ -170,6 +170,17 @@ class BridgeEditor{
   const joint=this.design.joints[index];
   return !!joint&&!joint.fixed&&!this.design.members.some(m=>m.material==='road'&&(m.a===index||m.b===index));
  }
+ snapJointPosition(index,p){
+  const step=this.woodStep;
+  const x=Math.round(p.x/step)*step;
+  let y=Math.round(p.y/step)*step;
+  let distance=Math.abs(p.y-y);
+  this.design.joints.forEach((joint,i)=>{
+   const offset=Math.abs(p.y-joint.y);
+   if(i!==index&&offset+1e-9<distance){y=joint.y;distance=offset}
+  });
+  return {x,y};
+ }
  jointMoveIssue(index,p){
   if(!this.canMoveJoint(index))return '道路の接合点と両岸の固定点は動かせません。';
   if(!this.validPoint(p))return 'この場所には接合点を置けません。';
@@ -430,6 +441,15 @@ scene.add(movePreview);
 const movePointMaterial=new THREE.MeshBasicMaterial({color:0x79efe2,depthTest:false,depthWrite:false});
 const movePoint=mesh(sphereGeo,movePointMaterial,0,0,0,.24,.24,.24);
 movePoint.renderOrder=6;movePoint.visible=false;
+const guideSpan=CONFIG.roadLength;
+const moveGuideGeometry=new THREE.BufferGeometry().setFromPoints([
+ new THREE.Vector3(-guideSpan,0,0),new THREE.Vector3(guideSpan,0,0),
+ new THREE.Vector3(0,-guideSpan/2,0),new THREE.Vector3(0,guideSpan/2,0)
+]);
+const moveGuide=new THREE.LineSegments(moveGuideGeometry,new THREE.LineDashedMaterial({
+ color:0x79efe2,dashSize:.25,gapSize:.13,transparent:true,opacity:.8,depthTest:false,depthWrite:false
+}));
+moveGuide.computeLineDistances();moveGuide.renderOrder=5;moveGuide.visible=false;scene.add(moveGuide);
 let visuals=[],jointVisuals=[];
 function barObject(material,ghost=false){const g=new THREE.Group();const m=(material==='road'?roadMat:woodMat).clone();if(ghost){m.transparent=true;m.opacity=.45;m.depthWrite=false}
  if(material==='road'){box(m,0,0,0,1,.15,1.8,g);for(let i=0;i<3;i++)box(white,(i-1)*.29,.085,0,.12,.015,.065,g)}else for(const z of [-.95,.95])box(m,0,0,z,1,.23,.23,g);
@@ -558,7 +578,7 @@ function updateUI(){
  $('flipPaste').hidden=$('cancelPaste').hidden=!pasteMode;
  $('speedHint').hidden=!play;$('budget').value=amount/CONFIG.budget;
  $('buildCount').textContent=`道路 ${editor.roads} / ${editor.roadSlots}枚　木材 ${wood}本`;$('buildProgress').max=editor.roadSlots;$('buildProgress').value=editor.roads;$('selfWeight').textContent=`橋の自重 ${Math.round(structuralMass()).toLocaleString()}kg ／ 車 ${CONFIG.carMass}kg × ${CONFIG.carCount}台（合計${(CONFIG.carMass*CONFIG.carCount).toLocaleString()}kg）`;$('stageName').textContent=`ステージ ${String(stage.id).padStart(2,'0')} ／ ${stage.name}・${CONFIG.valleyWidth}m`;$('stageSelect').value=stage.id;$('road').textContent=`道路 ${CONFIG.roadLength}m`;$('wood').textContent=`木材 最大${editor.woodMaxLength}m`;
- $('material').textContent=mode==='road'?`道路 ${CONFIG.roadLength}m・¥${editor.roadPrice.toLocaleString()}・${CONFIG.roadLength*CONFIG.materials.road.density}kg / 枚`:mode==='wood'?`木材 ${editor.woodMinLength}〜${editor.woodMaxLength}m（${editor.woodStep}m刻み）・¥${CONFIG.materials.wood.price}/m・${CONFIG.materials.wood.density}kg/m`:mode==='select'?'ドラッグで木材をまとめて選択。':mode==='moveJoint'?'赤い輪の接合点をドラッグ。道路の端と両岸の固定点は動きません。':mode==='erase'?'消したい部材を押してください。1つ戻すで復元できます。':'ドラッグ、矢印キー、WASDで移動。';
+ $('material').textContent=mode==='road'?`道路 ${CONFIG.roadLength}m・¥${editor.roadPrice.toLocaleString()}・${CONFIG.roadLength*CONFIG.materials.road.density}kg / 枚`:mode==='wood'?`木材 ${editor.woodMinLength}〜${editor.woodMaxLength}m（${editor.woodStep}m刻み）・¥${CONFIG.materials.wood.price}/m・${CONFIG.materials.wood.density}kg/m`:mode==='select'?'ドラッグで木材をまとめて選択。':mode==='moveJoint'?`赤い輪をドラッグすると ${editor.woodStep}m 刻みや、近くの接合点と同じ高さにそろいます。`:mode==='erase'?'消したい部材を押してください。1つ戻すで復元できます。':'ドラッグ、矢印キー、WASDで移動。';
  for(const id of ['road','wood','select','pan','erase','moveJoint']){$(id).classList.toggle('active',mode===id);$(id).disabled=!!sim||orbit}
  for(const id of ['clear','undo','redo','importDesign'])$(id).disabled=!!sim||orbit||(id==='undo'&&!editor.history.length)||(id==='redo'&&!editor.future.length);
  for(const id of ['start','weight'])$(id).disabled=!!sim||editor.roads<editor.roadSlots||orbit;
@@ -686,24 +706,26 @@ function beginJointDrag(e,p){
   neighbors.push({point:design.joints[m.a===index?m.b:m.a],bar:barObject('wood',true)});
  }
  for(const {bar} of neighbors)movePreview.add(bar);
- drag={type:'joint',id:e.pointerId,index,neighbors,dx:joint.x-p.x,dy:joint.y-p.y};
+ drag={type:'joint',id:e.pointerId,index,neighbors,x:e.clientX,y:e.clientY,dx:joint.x-p.x,dy:joint.y-p.y};
  previewJointDrag(e,p);
  return true;
 }
 function previewJointDrag(e,p){
- const next={x:p.x+drag.dx,y:p.y+drag.dy};
+ const moved=Math.hypot(e.clientX-drag.x,e.clientY-drag.y)>=4;
+ const next=moved?editor.snapJointPosition(drag.index,{x:p.x+drag.dx,y:p.y+drag.dy}):design.joints[drag.index];
  const issue=editor.jointMoveIssue(drag.index,next);
  const color=issue?'#ef5546':'#79efe2';
  for(const {point,bar} of drag.neighbors){
   positionBar(bar,point,next);bar.userData.mat.color.set(color);
  }
  movePoint.position.set(next.x,next.y,1.4);movePoint.visible=true;movePointMaterial.color.set(color);
- tooltip(e,issue||'指やボタンを離すと移動します。');
+ moveGuide.position.set(next.x,next.y,1.4);moveGuide.visible=moved;moveGuide.material.color.set(color);
+ tooltip(e,issue||`左岸から ${Number(next.x.toFixed(2))}m ／ 道路から ${Number(next.y.toFixed(2))}m`);
  return {next,issue};
 }
 function cancelJointDrag(){
  if(drag?.type!=='joint')return;
- drag=null;clearBars(movePreview);movePoint.visible=false;hideTooltip();
+ drag=null;clearBars(movePreview);movePoint.visible=false;moveGuide.visible=false;hideTooltip();
 }
 function pressCanvas(e,p){
  if(e.button===1||spaceHeld||(mode==='pan'&&!orbit)){drag={type:'pan',x:e.clientX,y:e.clientY};e.preventDefault();return}

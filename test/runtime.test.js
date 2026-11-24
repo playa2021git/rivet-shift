@@ -187,10 +187,20 @@ async function main(){
   assert.equal(game.editor.design.joints[vertex].x,original.x,'Preview leaves the design intact');
   touchUp(end);
  }
+ const step=game.editor.woodStep;
+ const targetX=original.x+step;
+ const targetY=(Math.floor(original.y/step)-1)*step;
+ const sameHeight=original.y-.17;
+ const alignment=new game.editor.constructor();
+ const moving=alignment.point(original.x,original.y);
+ alignment.point(targetX+step,sameHeight);
+ assert.equal(alignment.snapJointPosition(moving,{x:targetX+.05,y:sameHeight+.01}).y,sameHeight);
+ dragVertex(original.x,original.y,'mouse');
+ assert.deepEqual({...game.editor.design.joints[vertex]},original,'A click does not snap an existing joint');
  for(const pointerType of ['mouse','touch']){
-  dragVertex(original.x+.4,original.y-.3,pointerType);
-  assert(Math.abs(game.editor.design.joints[vertex].x-original.x-.4)<1e-6);
-  assert(Math.abs(game.editor.design.joints[vertex].y-original.y+.3)<1e-6);
+  dragVertex(targetX+.09,targetY+.08,pointerType);
+  assert(Math.abs(game.editor.design.joints[vertex].x-targetX)<1e-6);
+  assert(Math.abs(game.editor.design.joints[vertex].y-targetY)<1e-6);
   assert(new game.editor.constructor().load(game.editor.export()));
   elements.get('undo').click();assert.deepEqual({...game.editor.design.joints[vertex]},original);
   elements.get('redo').click();assert(game.editor.design.joints[vertex].x>original.x);
