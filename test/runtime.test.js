@@ -175,6 +175,35 @@ async function main(){
  key(' ');assert(game.play.paused);
  elements.get('orbit').click();elements.get('reset').click();
  assert(!game.play);assert(!elements.get('start').disabled);assert.equal(game.target.yaw,0);
+ const vertex=game.editor.design.joints.findIndex(j=>!j.fixed&&j.y>0);
+ assert(vertex>=0);
+ const original={...game.editor.design.joints[vertex]};
+ elements.get('moveJoint').click();
+ function dragVertex(x,y,pointerType){
+  const start={...touchPoint(original.x,original.y,44),pointerType};
+  const end={...touchPoint(x,y,44),pointerType};
+  touchDown(start);
+  for(const fn of canvas.handlers.pointermove)fn(end);
+  assert.equal(game.editor.design.joints[vertex].x,original.x,'Preview leaves the design intact');
+  touchUp(end);
+ }
+ for(const pointerType of ['mouse','touch']){
+  dragVertex(original.x+.4,original.y-.3,pointerType);
+  assert(Math.abs(game.editor.design.joints[vertex].x-original.x-.4)<1e-6);
+  assert(Math.abs(game.editor.design.joints[vertex].y-original.y+.3)<1e-6);
+  assert(new game.editor.constructor().load(game.editor.export()));
+  elements.get('undo').click();assert.deepEqual({...game.editor.design.joints[vertex]},original);
+  elements.get('redo').click();assert(game.editor.design.joints[vertex].x>original.x);
+  elements.get('undo').click();
+ }
+ const history=game.editor.history.length;
+ dragVertex(original.x,original.y+15,'touch');
+ assert.equal(game.editor.history.length,history,'An invalid release does not create a history entry');
+ assert.deepEqual({...game.editor.design.joints[vertex]},original);
+ const roadNode=game.editor.design.joints.findIndex(j=>j.x===length&&j.y===0);
+ assert.equal(game.editor.moveJoint(roadNode,{x:length,y:1}),false);
+ assert.equal(game.editor.moveJoint(0,{x:0,y:1}),false);
+ console.log('PASS: mouse and touch move a wooden joint; invalid drops and road/anchor moves are rejected; export, undo and redo work.');
  const beforeClear=JSON.stringify(game.editor.design);
  let finishEditedImport;
  fileInput.files=[{size:100,text:()=>new Promise(resolve=>finishEditedImport=resolve)}];
